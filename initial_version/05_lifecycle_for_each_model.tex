@@ -1,0 +1,537 @@
+
+\section{Lifecycle for each type of model}
+
+\subsection{Logical models}
+  
+\paragraph{Formal definition}
+A logical langauge $\L$ allows to specify formulas. Formulas are
+abstract representation of propositions, i.e., facts that are true or
+false in the intended domain. This interpretation is fixed by the
+semantics of $\L$ in which is possible to define the class of
+\emph{iterpretations} of $\L$. Interpretations are abstract
+representations of the state of the enviroment. For every interpretation
+$\I$ and every (closed) formula $\phi$ it is possible to predict the
+truth value of $\phi$ in $\I$.
+
+A logical model is a set of formulas $\T=\{\phi_1,\dots,\phi_n\}$,
+i.e., the facts that are known/believed to be true in the
+environment. $\T$ identifies a set of interpretations $\I$ (those
+which makes all the formulas in $\T$ true) which are all the possible
+situation in which the environment can be according to the agent
+knowledge/belief.
+
+The inference task in logical models is satisfiability, i.e, check for
+an interpretation $\I$ that satisfies a set of formulas $\T$.
+
+\paragraph{Key concepts}
+\begin{description}
+\item[logical symbols and relative semantics:] this is the class of
+  logical languages schema and the semantics of the logical symbols
+  (e.g. classical propositional logic, first order modal fuzzy logic, \
+\item[non-logical symbols:] symbols that capture the key aspects of
+  the environments (e.g., names for objects, primitive propositions,
+  properties, and relations)
+\item[logical term:] they denote objects in the environment 
+\item[logical formula:] they specify propositions about the state of the
+  environemtn
+\item[logical interpretation:] specify a state of the environment
+\item[satisfiability relation:] $\I\models\phi$ allow to compute the
+  truth value of the formulas in a particular interpretation 
+\item[logical consequence:] $\Gamma\models\phi$ defines what does it
+  mean that the truth value of proposition expressed in the formula
+  $\phi$ logically follows from the truth value of a set of
+  hypotetical propositions expressed by the formulas in $\Gamma$. 
+\end{description}
+
+\paragraph{Model Schema Specification:}
+The specification of model is done by choosing: 
+\begin{itemize}
+\item the set of logical symbols and the relative semantics (i.e.,
+  what is usually known as \textbf{the logic}). This choice is usually
+  done by the designer and no automatic methods are applied.
+
+\item the \textbf{non-logical symbols} used to specify with their
+  \emph{intended interpretation in the environment}, which maps each symbol in
+  some concept of the environment.  For instance one introduce the
+  binary predicate $\mathit{likes}$ and the intuitive interpretation
+  of $\text{firend}(x,y)$ as ``that the person $x$ likes the topic
+  $y$''. 
+
+  \begin{definition}[Interpretation in the environment] 
+  The concept of intended interpretation is a function that provides a
+  mapping from the formal interpretation $\I$ to a subset of states of
+  the environment. Equivalently it is a mapping between the terms and
+  the formulas of the language into the entities and the propositions
+  of the environment. 
+\begin{align}
+\label{eq:intended interpretation}
+\begin{array}{l}
+\realWorldInterpretation : \text{$\L$-term} \mapsto \text{entity of the environment} \\
+\realWorldInterpretation : \text{$\L$-formula} \mapsto \text{proposition about the environment} 
+\end{array}
+\end{align}
+\end{definition}
+
+  Usually this operation is done manually, but approaches to
+  introduce new symbols with some automatic method are developed under
+  the name of \emph{predicate invention}
+
+\item Restrict the class of interpretations to a certain
+  subclass. This can be done by specifying a set of constraints that
+  must be satisfied by an interpretation, or by a set of formulas,
+  \textbf{the set of axioms}, that must be satisfied by the
+  interpretations. Notice that there could be properties of
+  interpretations that cannot be expressed in terms of axioms.  In
+  general the environment can be in many states, the set of all
+  possible (abstraction of) states according to the agent model is the
+  set of interpretations that satisfies the axioms.  
+  
+  \begin{definition}[Axioms]
+    The set of axioms of a logical model is a set of formulas
+    $\Axioms$, such that the set of legal states of the environment
+    are those that corresponds via the intuitive interpretation to the
+    set of interpretations that satisfy the axioms, i.e.,
+    $\{\I \mid \I\models \Axioms\}$
+  \end{definition}
+
+   Axiom
+  specification is done mostly manually, but there are method for
+  learning these axioms automatically. Some results can be found under
+  the research area of \emph{structural learning}.
+
+\end{itemize}
+
+\paragraph{Model instantiation}
+In logical model knowledge about the environment is expressed in terms
+of formulas and relative truth values. Logical model instantiation
+amounts in specifying a \emph{set of formulas}, often called
+\textbf{facts} that represent what the agent believe to be true in the
+current state of the environment. I.e. the agent believes that the
+current state of the environment is represented by an interpretation
+among those that satisfies the axioms and the set of facts.
+A key concept in this phase is the notion of \textbf{consistency} or
+\textbf{satisfiability}. A logical model (set of facts) is consistent
+if there is at least one interpretation (a representation of the state
+of the environment) that renders true the axioms and the facts. 
+
+In order to instantiate/learn a model for the environment the agent
+need to have access to the environment via observations. 
+\begin{center}
+\begin{tikzpicture}[every node/.style={scale=.8}]
+\node[ellipse,draw,fill=blue!10] (env) {environment}; 
+\node[below = of env] (he) {};
+\node[below = of he,ellipse,draw,fill=green!10] (hum) {human}; 
+\node[draw,right =2 of he,fill=red!13,text width=10em,align=center]
+(obs) {sensor data \\ images  \\ natural language \\ menu selections \\ \dots};
+\node[text width = 10em,align=center,ellipse,draw,right=2 of
+obs,fill=yellow!10] (facts) {Facts  \\ (logical formulas)};
+\node[fill=gray!20,draw,below = of obs,text width = 10em] (web) 
+{external resources and services (e.g., the
+web, db-pedia, databases, \dots };
+\draw[->] (env) -- (obs);
+\draw[->] (hum) -- (obs);
+\draw[->] (obs) -- (facts);
+\draw[->] (web) -- (facts);
+\end{tikzpicture}
+\end{center}
+
+\begin{definition}{Logical Model instantiation}
+\label{def:logical-model-instantiation}
+Model instantiation is the capability of transforming a (complex)
+observation $o\in\Observations$ in either an entity or a formula 
+in the language $\L$ of the logical model. 
+\begin{align}
+\logicalModelInstantiation:o\mapsto\text{$\L$-term}|\text{$\L$-formula}
+\end{align}
+\end{definition}
+
+
+
+
+In most of the cases learning, this is done manually, but also
+automatic methods as e.g., ontology population and inductive logic
+programming, allow to learn models from a set of
+data/observations. Update is usually obtained by adding or deleting or
+modifying some formulas in the knowledge base.
+
+
+
+\paragraph{Model update}
+In updating/extending the model one has to pay attention to maintain
+consistency at the price of minimal modification. The literature of
+belief revision proposes a number of methods to solve this problem
+
+
+\paragraph{Inference with the model}
+Model inference is done via logicval inference, or rewriting, or
+satistisfiabiliy or model checking.  For expressive logics the problem
+of computing the logical consequence of a set of formulas is not
+decidable. Therefore logical inference is guarantee to be complete
+only on decidable fragments of the logic. For the other one have to
+stay with incomplete or approximate inference engines.
+
+\subsection{Probabilistic models}
+\paragraph{Model definition:}
+A probabilistic model \cite{murphy2012machine} is defined by a set of
+random variables $X$ (i.e., a function that associates a value of the
+outcome of an experiment). Random variables are split in two sets: the
+observable variables $O$ and the hidden variables $H$. Each variable
+is associated with a discrete or a continous domain. The second
+component is a probabilistic distribution $P(X=x)$ over the set possible
+values $x$ of the random variables. This funciton is called
+\emph{probabilistic mass funciton} with $\sum_{x}P(x) = 1$, and
+\emph{probabilistic density funciton} with $\int P(x) dx=1$.
+Given a probabilistic model $P(X=x)$, and a value $o$ of the
+observable variable, we are interested in computing the
+$P(H=h\mid O=o)$, i.e., the conditional probability of the hidden
+variables given the observations $o$. 
+
+\paragraph{Model Schema Specification:}
+The specification of the schema of a probabilistic model consists in
+defining the set of random variables, their domain and their
+(conditional) dependences. Usually, the set of variables are split in
+two subset, the observables and the hidden variables.  Examples of
+variables can be boolean variables that encodes propositions that are
+true or false in the environment; integer variables that encode some
+discrete quantity in the environment (e.g., how many friends has a
+person), or continous variables that encode some continous measure in
+the environment, e.g., the distance between the agent and the next
+wall. The (in)dependency conditions between probablistic variables is
+represented by a directed or undirected graph whose vertexes are the
+random variables. That's why probabilistic model are often called
+probabilistic graphical models \cite{koller2009probabilistic}.  The
+second element of the schema of a probabilistic model is the shape of
+the probability mass/density funciton of the join distribution of the
+random variables. I.e., a parametric family of probabilistic
+mass/density function.  A third component of the probabilistic model
+schema, is a probability distribution over the parameter values. When
+every parameter value is equiprobable, this information is
+omitted. Usually thin part of the model schema is called \emph{prior},
+as it represent some a priori knolwedge about the distribution of the
+parameter values.
+
+\paragraph{Model Instantiation}
+In the probabilistic setting the model instantiation is usually called
+\emph{model learning} or \emph{parameter estimation}. The main goal of
+this phase is to find the (distribution over the) set of parameters
+values that better fits the set of data/observations and, if it is
+available some prior distribution over the parameters. For this one
+can apply the Maximum Likelihood criteria, or the Maximum a posteriori
+criteria, depending on the fact that a prior distribution on the
+parameters is considered. There are three main methods that are used
+to provide these estimation. We breafly summarize them in the
+following assuming that the probablistic model is expressed by the
+parametric pmf/pdf $P(D\mid\theta)$.
+
+\begin{description}
+\item[Maximum Likelihood (ML):] Given a set of observations $D$ we have
+  the likelihood of the parameter values $\theta$, which s defined
+  as $\theta^*=\argmax_{\theta}p(D\mid\theta)$. 
+  In general, we would expect good choices of $\theta$ to assign high
+  likelihood to the observed data. This suggests the maximum
+  likelihood criterion: choose the parameter $\theta$ which maximizes
+  $P(D\mid\theta)$ of the observed datas $D$.
+  In some case this can be computed analytically,
+  but in most of the cases when $P(D\mid\theta)$ is not a well known
+  family, this is computed by approximated numerical optimization
+  methods, similar to what is applied in neural networks and other
+  numerical models. Notice that Maximum likelihood criteria does not
+  require/uses information on the prior distribution over parameters
+  and on the data.
+\item[Bayesian posterior (B):] Bayesian estimation method do not compute a single
+  values for the parameters, but rather a probablity distribution over
+  the parameter values, starting from an initial probability
+  distribution $P(\theta)$ on the parameters' values, known as the
+  \emph{prior distribution} on the parameter values $\theta$. This
+  distribution is supposed to encode agent's prior beliefs about the
+  parameters before looking at the data. Once the agents observes $D$
+  it's beliefs about $\theta$ might change, according to the Bayes
+  rule.  In particular, the \emph{posterior distribution}
+  $P(\theta\mid D)$ corresponds to our beliefs about the parameters
+  after observing the data, which can be computed using Bayes’ Rule:
+  $P(\theta\mid D) =\frac{P(D\mid\theta) P(\theta)}{\int
+    P(D\mid\theta) d\theta}$. Therefore, this method does not do a
+  single instantiation of the probabilistic model $P(D\mid\theta)$,
+  but assigns a probability to all the possible instantiations of the
+  model. 
+\item[Maximum a posteriori (MAP):] This method instantiates the model with
+  the value of $\theta$ that maximizes the posterior distribution
+  $P(\theta\mid D)$. Ie $\theta^*=\argmax_{\theta}P(\theta\mid D)$. 
+\end{description}
+
+\paragraph{Model Update} 
+Probabilistic model can be updated by changin the (distribution of)
+parameter values, or updating the structure of the graphical model. An
+update is usually the consequence of new (training) data available.
+The update of the parameter (distribution) is performed by applying
+the same method used for the model instantiation considering the
+additional data. The update method depends from the specific method
+used for the parameter estimation (Max Likelihood, Bayesian, Maximum a
+Posteriori). At a high level we can think that this
+update is
+$$
+\text{(ML,MAP):}\ \ \  \theta \stackrel{D}{\longrightarrow} \theta'
+\ \ \ \ \ \ \ \ \ \ \ \
+\text{(B)}\ \ \ P(\theta) \stackrel{D}{\longrightarrow} P'(\theta)
+$$
+
+\paragraph{Inference}
+Given an instantiated mdoel over a set of variablex $X=O \cup H$ the
+and an estimation of the parameters $\theta$, the problem of inference
+is the problem of estimating the conditional probability of $P(H\mid
+O,\theta)$, i.e., the probability the hidden variables $H$ given the
+observations $O$. If we have a unique estimation of $\theta$ (obtained
+by ML or MAP) the inference amounts in finding $P(H\mid
+O,\theta^*)$. If instead we have a posterior distribution over
+$\theta$ (obtained by Batesian estimation), we compute $\int_{\theta}
+P(H\mid O,\theta)\cdot P(\theta) d\theta $.
+
+\subsection{Real Function Models}
+
+\paragraph{Model definition:}
+Functional models are (real value) functions, (also called
+\emph{predictors} \cite{deisenroth2020mathematics} Chapter 8.1) that,
+given a particular input observation, encoded in a vector of $m$ real
+value features, produces an output a prediction, which is a
+real-valued vector. This can be written
+as
+$$
+f :\R^m \longrightarrow \R^n
+$$
+The predictions of functional models are interpretable in different
+ways depending on the specific application domain and task.
+A \emph{classifier} is a model $f$  that classify the output vector
+$\left<y_1,\dots,y_n\right>$ is interpreted as the probabilities that
+the input observation is classified in the (disjoint) classes
+$C_1,\dots,C_n$.  If $f$ is a regression model then it's output is
+interpreted as an estimation/prediction of some unobservable quantity
+that depends from the observations given in input (e.g., to predict
+future stock market trend on the basis of historical data, the
+distance of a robot from the objects on the basis of a pictures).
+A \emph{data analysis} model $f$ can be used for clustering the data
+or for embedding/encoding them in a low dimensional space.  
+Examples of real function models are Neural Networks, Support Vector
+Machines, Linear and Non linear regression models (linear, Linear,
+Logistic, Polynomial, Stepwise, \dots). 
+
+\paragraph{Model Schema Specification:}
+
+The specification of the schema of a real function model consists in
+three main components, that specifies the \emph{input features} to be
+extracted from the observations, \emph{the shape of the function} and
+its parameters, and the \emph{interpretation of the prediction} as in
+terms of the task that the model is supposed to solve.
+\begin{description}
+\item[Design of input features]
+Feature selection/definition is a key aspect. If observations are
+already in the real field then features can be defined as real
+functions on the observations. This can be done manually, or use
+convolutional neural networks that are capable to automatically
+extract features which are optimal for a certain task. When
+observations are not in the real field, e.e., texts, or structured
+information like relational data, one possibility is to use embeddings
+i.e., functions that are capable to map discrete structured data into
+real field, perserving similarity. E.g., one of the most famous
+embeddings used for text is BERT \cite{devlin2018bert}.
+
+\item[Specify the structure of $f$] The core of a real function model
+  is the parametric family from which the function is selected. The
+  two key components that one has to define are the set of parameters
+  (as in the case of probabilistic models) and the shape of the
+  function. For instance, the structure of linear models are
+  $f(x) = W\cdot x + B$ wehre $W$ is an $m\times n$ matrix of
+  parameters and $B$ is a vector of $m$-parameters, and $f$ is defined
+  as an affine transformation on the input features $x$.  Deep neural
+  networks defines much more complex structures of a function, but the
+  principle remain the same. In most of the case these design is done
+  manually, and currently there is not a comprehensive study of the
+  advantage/disadvantage of choosing a structure or the other. Some
+  study on the relationship on the network architecture and their
+  performance in different tasks has beed done recently, see for
+  instance \cite{lathuiliere2019comprehensive,cortes2017adanet}.
+  There are however some studies on automatic ways to overcome the
+  problem of choosing the optimal network architecture
+  \cite{saxena2016convolutional,xie2017genetic}.  Overall, there is
+  very little guidance on the plethora of design choices and
+  hyper-parameter settings for deep learning architectures.
+
+\item[Output interpretation]
+  The output of a functional model is a vector in $\R^m$ and the
+  artificial agent should be provided with a way to use this output in
+  order to take decisions and actions. This interpretation is also
+  necessary in order to evaluate the correctness of the model, i.e.,
+  if it performs correct or wrong predictions. This interpretation is
+  encoded in the so called \emph{loss function} that provides a measure
+  (i.e., a real number) of quality of the performance of the model by
+  measuring how far is the prediction of the model from the correct
+  one (i.e., the error ration of the model). In classifiers for
+  instance the loss function measures the mis-classification rate,
+  while in regression it measures the distance between the correct
+  answer and the predicted answer. In models for clustering or
+  encoding the loss measures the quality of the clustering. 
+\end{description}
+
+\paragraph{Model Instantiation}
+The instantiation of a real function model schema consists in
+finding the parameters values of the model that minimizes the loss
+function computed on a set of data provided in input. This is quite
+similar to the criteria of maximum likelihood applied to instantiate
+the probabilistic models. In case of supervised learning, where we
+have a set of pairs input output the optimization is defined as
+$$
+\argmin_{\theta}\mathcal{L}(y^{(1)},\dots,y^{(k)}, f(x^{(1)}\mid\theta),\dots,f(x^{(k)}\mid\theta))
+$$
+where $\mathcal{L}$ is the function that compares the correct
+predictions $y^{(i)}$ with the predictions done by the model
+$f(x^{(i)}\mid\theta)$ instantiated with the parameter values
+$\theta$.
+In case of data analysis algorithms, the loss function is defined only
+w.r.t., the data input (this methods are usually called unsupervised
+learning). The learning in this case is defined as follows: 
+$$
+\argmin_{\theta}\mathcal{L}(f(x^{(1)}\mid\theta),\dots,f(x^{(k)}\mid\theta))
+$$
+In both cases the instantiation is done with respect to a set of data
+that are provided in input. The result of the learning depends in a
+substantial way on the quality and quantity of data provided in input
+for training. 
+
+\paragraph{Inference}
+Inference in functional models consists in just computing the value of
+the function on a given input i.e.,
+$$
+x \mapsto f(x)
+$$
+\paragraph{Model update}
+Model update when some new data become available mainly happens by
+reinstantiating he model, considering the loss with respect to a
+combination of the ``old data'' and the ``new data''. Such a
+combination can be just the union, or some weighted combination.
+
+\subsection{Action Models}
+
+  \paragraph{Model definition}
+  \emph{Action models} specifies the expected advantage an agent
+  can obtain in following a certain policy (= action selection
+  strategy). This category of models contains planning models,
+  Markov Decision Processes, game theoretic models, and action preference
+  models. In the literature there are many different types of action
+  models, and we don't try to summarize them in a single definiton. We
+  rather report below what are the basic components of an action
+  model.
+
+  \begin{description}
+  \item[State space] a set of states in which the agent can be. This set could be
+    the set of all the observations/perceptions of the agent (in case
+    of full observable models) or a set of latent states which depends
+    from the observations. 
+  \item[Action space] a set of actions that can be executed by the agent. 
+  \item[Transition relation] a description of the preconditions of the actions (when they
+    are possible) and the effects of the actions. These effects can be
+    deterministic, or non deterministic. This component in some models
+    is not strictly necessary.
+  \item[Policy or plan] a policy, i.e. a function that for every state provides a
+    (probability distribution of) action(s) that should be executed.
+  \item[Goal] the specification of one or more alternative situations
+    that the agent should achieve. Or the specification of a
+    preference relation (partial order) on the possible outcomes. 
+  \end{description}
+  
+  \paragraph{Model schema specification}
+  The definiton of the model schema fixes the set of actions, and the
+  set of states. Actions can be specified as atomic actions (e.g.,
+  turn-left, turn-right, \dots) or with some argument (e.g., go
+  forward of $1m.$, turn of $45^\circ$, move block 1 on top of block
+  2). The set of states, can be specified explicitly by enumerating
+  all the states or by providing a set of state variables
+  $V_1,\dots,V_n$ that take values in domains $D_1,\dots,D_n$ and
+  define the set of states as a proper subset of $\times_{i=1}^nD_i$
+  by means of constraints. The planning and the robotic communities
+  have developed a number of languages for expressing actions schemata
+  see \cite{nakawala2018approaches}.  In the area of reinforcement
+  learning states and actions are often specified explicitly but there
+  are examples of languages for more structural specification see
+  e.g., \cite{jothimurugan2019composable,li2017reinforcement}.  In the
+  area of game theory, a game schema can be described either
+  explicitly, by describing the set of states, the type of actions
+  (that each agent can perform) and their effects, or one can use a
+  specification language as for instance Game Description Language
+  \cite{thielscher2011general,jiang2016epistemic,kowalski2016towards}.
+
+  \paragraph{Model Instantiation}
+  
+  \paragraph{Model Inference}
+
+ \begin{itemize}
+  \item Reinforcement learning:  Reward function $\rightarrow$ optimal policy
+
+  \item planning: goal $\rightarrow$ optimal plan
+
+  \item game theory: utility function $\rightarrow$ equilibrium 
+  \end{itemize}
+  \paragraph{Model update}
+
+  \subsubsection{Optimization models}
+  Optimization models \cite{nocedal2006numerical}
+  represents the world in terms of a set of
+  real functions $f_i:\R^m \rightarrow \R$. over $n$ real variables
+  $x_1,\dots,x_n$. Observations on the real world are mapped into
+  constraints on the values of such a variables, e.g., the observation
+  that the temperature is $21^\circ$ with an erro of $0.1^\circ$, is
+  represented by the constraint $20.9\leq x_{temp}\leq 21.1$. Other
+  variables are in control of the agents who can operate in order to
+  set their values. These variables also corresponds to some
+  proposition about the state of the world. The environment in which
+  the agent operates, should also have a number of physical
+  constraints, which are also represented in terms of constraints on
+  the values of observable and control variables. 
+
+  \paragraph{Definition}
+  An optimization model consists in a 
+  function that have to be minimized relative to some set, representing a range of choices
+  available in a certain situation. The function allows comparison
+  of the different choices for determining which might be best.  More
+  formally we define the optimization model in terms of
+  \begin{itemize}
+  \item a funciton $f(x):\R^n\longrightarrow R$
+  \item a set of equality constraint $\{g_i(x) \geq 0\}_{i\in EC}$ where
+    $g_i:R^n\longrightarrow R$.
+  \item a set of constraint $\{h_i(x) = 0\}_{i\in IC}^m$ where
+    $h_i:R^n\longrightarrow R$. 
+  \end{itemize}
+  The set $S=\{x\in\R^{n}\mid g_i(x) \geq 0, \mbox{ and } h_j(x)=0\}$
+  is the set of ``admitted solutions'', in other words the space of
+  decisions, from which the agent have to select the optimal one. 
+  
+  \paragraph{Model Schema Specification:}
+  Optimization model schemata are well defined they are described
+  along two dimensions. The domain of decision variables, namely
+  discrete or continous, and the presence of constraints, namely
+  constrained or unconstrained. A third dimension are the family of
+  functions to be optimized and the constraint functions: namely,
+  linear or non linear functions. Furthermore the constraint region
+  can be conves or non-convex. 
+
+  \paragraph{Model Learning/Instantiation}
+  Model specification is the process of identifying the objective
+  funciton $f(x)$, the set of unknown variables and the constraints
+  for a given problem Construction of an appropriate model is the
+  first step---sometimes the most important step---in the optimization
+  process.
+          
+  \paragraph{Inference with the model}
+  Inference amounts in running some optimization algorithm that find
+  an (approximate) solution of the optimizaiton model with respect  to
+  some observations. I.e., to solve the problem
+  $$
+  x^* = \argmax_x f(x)  \ \ \ \ \ \ \ \ \mbox{under the constraint
+    $x\in S$. }
+    $$
+  There is a large literature of optimization algorithms, which are
+  general purpose or domain specific. They can provide caertain or
+  approximate answer. They can return global or local optimum. 
+    
+  \paragraph{Updating the model}
+  Optimization model can be updated by adding or deliting some
+  constraint or by modifying the objective function. 
+

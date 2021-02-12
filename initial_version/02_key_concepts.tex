@@ -1,0 +1,200 @@
+\section{Key concepts of Human Centered AI } 
+
+\subsection{Observations}
+
+% Comments by Sonja:
+
+% This section describes sensors, but mostly sticking to textual examples
+% (NLP). There are thousands of types of sensors, and they all serve their
+% purpose depending on what data they sense. This is different for all
+% pilots - IoT uses variety of sensors: cameras, ultrasonic, infrared,
+% etc.; Robotics use potentiometers, accelerometers, Gimbles etc.; Media
+% uses cameras.... Perhaps the examples for sensors in this section can be
+% specific for each pilot (maybe even include this section in each
+% pilot).
+
+% What is the meaning of "sensor of a "text classifier""?  
+
+% Sensor is something that gives information - if this here also stores
+% a file, than that is a transducer - does something.
+
+An agent can observe the humans and the environment through its
+sensors. Here we mean sensor in a broad sense, i.e., everything that
+can be used by the artificial intelligent agent to autonomously
+acquire data about the environment (including the humans) and
+everything the humans and the environment can use to input data to the
+artificial intelligent agent.  Observations are collected via
+sensors. There are thousands of types of sensors, and they all serve
+their purpose depending on what part of the environment they
+sense. Every single pilot in the project has defined a different set
+of sensors. E.g., IoT sensors are: cameras, ultrasonic, infrared,
+\dots; Robotics sensors are: potentiometers, accelerometers, Gimbles
+\dots.; Media sensors include: digital cameras, audio recording,
+textual documents, etc.  Essentially, sensor systems are those that
+inject input data. Input data can be represented in many different
+ways, they can be continuous discrete, structured, lists, trees,
+etc. Typically, input data is provided with some meta information that
+describes its structure.  Examples of input data are video, picture,
+all type of sensors, texts, spoken sentences, etc. In online system,
+input data are streams of data, not just a batch of data. Among the
+observations we also include the ``commands/requests'' that the human
+poses to the artificial agent.  For this reason, one can think that in
+general every data is associated with some time stamp $t$ (that can be
+relative or absolute). In some cases time information is not relevant
+for the decision process of the agent, in other it is. However, what
+it should always hold is that agents can take a decision at time $t$
+only on the basis of the data that are available to the agent before
+this time, i.e., data that are tagged with the timestamp $t'< t$.
+
+Data can be associated with a type and a structure, which should
+also be provided as input. 
+
+\begin{definition}
+The \emph{observations} of an AI agent are all the data that an agent
+can observe at any possible point of its evolution. 
+\end{definition}
+
+\subsection{Actions}
+\def\actions{\mathcal{A}} Here we consider actions in the very broad
+sense as all the possible outcomes of an intelligent system. They can
+be physical actions, e.g., the robot is moving 10 cm forward, an
+autonomous car braking, an autonomous personal assistant books a room
+in hotel Bellavista, or buys 100 stocks of the company SuperGulp.
+Actions include also \emph{planning actions}, i.e.  some plan (e.g.,
+sequence of simpler actions, or more complex structure of actions) the
+agent intends to execute form now on. Another type of action are
+\emph{informative actions} that inform the human of a certain
+conclusion that the agent has reached. Examples of informative actions
+are classifications of input, ranking, predictions done by some
+regression model, etc.
+
+In the abstract, any artificial agent can be associated with a set of
+actions $\actions$ that it can take. For instance, the set of actions
+for a classifier with classes $C_1,\dots,C_n$, is the set
+$\{C_1,\dots,C_n\}$ of possible outcome of the classifier. If the
+classifier is a multi-classifier, then the set of actions is the set
+of all the subsets of $\{C_1,\dots,C_n\}$. If the system is a ranking
+system, then its set of actions is the set of ranking functions
+of a class of documents provided in input.
+The actions associated to a planner that works on a particular
+planning domain $\left<S,A,T,s_0,G\right>$ is the set of plans $\pi$
+that reaches the goal $G$. The set of actions of a robot that can
+navigate a room can be $\{forward(x),turn(\theta) \mid x \in R^+,
+\theta \in [-\pi,\pi]\}$.
+As one can see from the above example the set of actions associated to
+an artificial agent can be discrete or continuous and they strictly
+depend from the input.
+
+Notice that in the set of Actions we don't consider the actions
+executed by the environment or by the human. As we explained before,
+they are part of the Observations.
+
+An important aspect of the actions in human centered AI is that they
+should be relevant for the human. For instance in a ranking system,
+the user might be interested only in the first 10 documents. In this
+case, though the outcome of the system is an entire ranking of all the
+documents, the actions which are relevant for the human are only the
+first 10 documents in each rank. Another example with physical robots
+is the following: the outcome of the planner of a robot could be to
+move from the kitchen to the bedroom following one particular path
+(path planning) though the human could be interested only in the
+starting and ending point of the path, and not in the precise
+trajectory that is followed by the robot. Some outcomes of a robot
+could also not be perceivable by a human. E.g., the fact that the
+personal assistance books the hotel BellaVista through Trivago or
+Booking.com is not perceived by the user, which only gets the booking
+information as outcome.
+
+\begin{definition}
+  The set of actions of an artificial intelligent agent is a set
+  $\actions$ which includes all the possible outcomes of the 
+  agent that are perceivable and have relevant effects on the human and the
+  environment in which the agent operate.
+\end{definition}
+
+\subsection{Explanations} 
+An explanation is an argument that a human can understand and can
+accept. To be understandable the explanation should be given in a
+``language'' which is understandable by the human. Furthermore, the
+explanation contains an argumentation, (e.g., a sequence of facts and
+rules that derives facts from previous facts in the sequence) that
+justifies a the conclusion of the artificial agent starting from the
+given input. This argument can be a deductive or an inductive
+argument. However what is most important is that the human should be
+able to decide to accept or not accept such an argument.
+
+In general an explanation of a decision taken by the agent can be
+independend from how the agent reaches such a decision. This is
+expecially true when the decision is taken by a black-box method such
+as a neural network. 
+
+A deductive argument is an argument in which it is thought that the
+premises provide a guarantee of the truth of the conclusion. In a
+deductive argument, the premises are intended to provide support for
+the conclusion that is so strong that, if the premises are true, it
+would be impossible for the conclusion to be false.
+
+An inductive argument is an argument in which it is thought that the
+premises provide reasons supporting the probable truth of the
+conclusion. In an inductive argument, the premises are intended only
+to be so strong that, if they are true, then it is unlikely that the
+conclusion is false.
+
+In other words in order to define explanation we need to have a
+language $L$ and a combination of deductive/inductive $DIS$ system
+that are accepted by the human. Within a deductive/inductive system
+$DIS$ it is possible to define a set $\Pi$, that called valid
+deductions, such that each $\pi$ is a deduction of a decision $A$ from
+a set of input data $O$, which is acceptable by the human.
+
+\begin{definition}[Explanation]
+  The explanation of a decision/action $A$ of an artificial
+  intelligent agent as a reaction of the observations 
+  $O$, is an argument in the deductive/inductive system $DIS$
+  of the fact that $A$ follows from $O$, i.e., it is a proof $\pi$ of
+  $O\models_{DIS} A$
+\end{definition}
+
+\subsection{Requirements}
+A requirement, or dependability requirement, is an artifact that
+describes a set of required behaviors of an artificially intelligent
+system. This is central to the problem of verifiable AI, which has the
+objective of verifying that the systems meets its dependability
+requirements. 
+Dependability requirements are expressed in a human understandable
+way, they are indeed formulated by humans. Then the problem of
+verifiable AI, is how to translate these requirements in algorithms
+that verify that the system is compliant with them. 
+Being a human produced artifact, providing a sharp definition of
+(dependability) requirement is rather complex if not impossible. In
+the examples provided in this overview document (e.g., automotive and
+medical domain) dependability requirements can be classified into two
+categories 
+\begin{description}
+\item[Input-output constraints for inference:] given a certain (class of) input data
+  a specific (class of) output data is required. If input and output
+  data classes are described in some logical term then this type of
+  requirement can be seen as pairs: 
+$$
+\Delta\vdash\Gamma 
+$$
+where $\Delta=\{\delta_1,\dots,\delta_m\}$ is a set of properties of
+the input, and $\Gamma=\{\gamma_1,\dots,\gamma_n\}$ is a set of
+properties of the expected output. Intuitively $ \Delta\vdash\Gamma $
+means that ``if the input meets all the properties in $\Delta$, then
+the output should meet at least one property in $\Gamma$.''.  This
+input output constraint on inference can also be associated with some
+level of satisfiability. E.g., the constraint $\Gamma\vdash\Delta$
+should be satisfied at least 99\% of the time.
+
+\item[Input-output constraints for learning:] one of the main
+  characteristics of AI systems is that their behaviour is determined
+  by the data that are used to train the system. Examples of
+  requirement in this sense is the fact that the training data are
+  representative of a given population for which the AI system is
+  designed. There is no simple way to express this type of requirement
+  in some mathematical structure. This could be the subject of further
+  study in the project. 
+\end{description}
+
+

@@ -1,0 +1,160 @@
+\section{Introduction}
+
+% \paragraph{Agent-Environment pair} 
+We consider a reference framework composed of an artificial
+intelligent agent (or simply agent) that operates in an
+environment. We call this framework the agent-environment framework. In an
+agent-environment framework there is a clear division between what is
+internal to the agent, and what is external to the agent, i.e., the
+environment. The agent perceives the environment via sensors, and
+modifies the environment via actions. Every interaction between the agent
+and the environment happens through these two categories. Action and sensors
+are considered in a very broad sense. Sensors range from low level
+sensors to input in natural language, images, movies, etc.  Actions
+may range from physical actions, as moving ahead, moving an arm,
+grasping an object, to communicative actions, such as sowing some data
+on the screen, uttering a sentence, smiling, or playing a song or a
+movie. In general
+there is no synchronisation between actions and observations, and both
+actions and observations can happen independently without following a
+precise protocol.  Finally the environment may change due the the effect
+of some agent's action, or it may change due to some external cause,
+which is not controlled by the agent (e.g., some other agent can
+operate in the environment)
+
+% \paragraph{Goal directed agents} 
+An AI agent always has one or more goals to achieve. At a given
+time-point of its life, some goals can be completely
+achieved (and therefore these are not goals anymore), some of them can be
+partially achieved, and for other the agent does not have a plan to
+achieve them.  In order to
+achieve its goal(s) an AI agent can autonomously execute actions (e.g.,
+an autonomous agent with a planner obtains these actions by planning)
+or some external event may happen so that the agent will get closer to
+the goal (e.g., a classifier is trained with new labelled data).
+Goals in agents exist on several levels: (i) beneficial properties of
+a model and its reasoning on the level of model schema (including
+algorithm) design, (ii) high performance (correctness and/or
+efficiency) on the level of setting concrete parameters of a model in
+an agent, and (iii) goals that are represented within the agent and
+direct the agent's behaviour in the world.  Typical machine
+learning goals are on level (ii) and typical planning goals are on
+level (iii).  However, the agent might have the goal to improve itself
+by finding additional data for training (as done in Active Learning)
+or by attempting modifications of its own system (similar to genetic
+programming) where the levels merge or are all represented within the
+agent.
+
+% \begin{tikzpicture}[every node/.style = {scale=.6}]
+% \draw (0,0) rectangle (5,3);
+% \draw (0,1) -- (4,1) -- (4,2) -- (1,2);
+% \node[circle,draw,fill=black!10] (A) at (.5,.5) {A};
+% \node[circle,dashed,draw,red,fill=red!10] (G) at (2.5,1.5) {G};
+% \foreach \i/\p/\q in {1/1.5/0.5, 
+%                      2/2.5/0.5, 
+%                      3/3.5/0.5, 
+%                      4/4.5/0.5, 
+%                      5/4.5/1.5,
+%                      6/4.5/2.5,
+%                      7/3.5/2.5,
+%                      8/2.5/2.5,
+%                      9/1.5/2.5,
+%                      10/0.5/2.5,
+%                      11/0.5/1.5,
+%                      12/1.5/1.5}{
+% \node[circle,dashed,draw] (\i) at (\p,\q) {A};
+% };
+% \foreach \i/\j/\a in {A/1/east,
+%  1/2/east,2/3/east,3/4/east,4/5/north,5/6/north,6/7/west,7/8/west,8/9/west,9/10/west,10/11/south,11/12/east,12/G/east}
+% \draw[->,dashed] (\i) -- node[sloped,above]{\a} (\j);
+% \end{tikzpicture}
+
+% \begin{tikzpicture}
+% \draw (0,5) -- (0,0) -- (5,0);
+% \foreach \i/\n in {0/0.0,1/0.2,2/0.4,3/0.6,4/0.8,5/1.0}{
+%    \draw[line width=.1] (-.2,\i) -- (.2,\i);
+%    \node at (-.4,\i) {\n};};
+% \foreach \i/\n in {0/0.0,1/0.2,2/0.4,3/0.6,4/0.8,5/1.0}{
+%    \draw[line width=.1] (\i,-.2) -- (\i,.2);
+%    \node at (\i,-.4) {\n};};
+% \node[circle,draw,fill=black!10] (C) at (1,1) {C};
+% \node[circle,dashed,draw,red,fill=red!10] (G) at (5,5) {C};
+% \foreach \i/\p/\q in {1/2/3,
+%                      2/4/3.5}{
+% \node[circle,dashed,draw] (\i) at (\p,\q) {A};
+% };
+% \foreach \i/\j in {C/1,1/2,2/G}
+% \draw[->,dashed] (\i) -- node[sloped,above]{train} (\j);
+% \node[rotate=90] at (-1,2.5) {recall};
+% \node at (2.5,-1) {precision};
+% \end{tikzpicture}
+
+
+% \paragraph{Human Centered AI agent} 
+A way to see human-centered AI is shown in
+figure~\ref{fig:hcai-onion}.  An initial observation concerns the fact
+that humans cannot be separated from the environment where they
+operate. Indeed they are \emph{part} of the environment; they are
+\emph{embedded} in it, In other words, humans and environment are
+complementary, interconnected, and interdependent in the natural
+world, and they interrelate to one another. Therefore Human-Centered Artificial
+Intelligence should take into account both humans and the
+environment where humans operate.
+
+\begin{figure}[h]
+  \begin{center}
+    \input{onion}
+\end{center}
+\caption{\label{fig:hcai-onion} The Human-Centered Artificial
+  Intelligence}
+\end{figure}
+
+The external ring in Figure~\ref{fig:hcai-onion} represents the
+artificial intelligent agent(s). It can refer to one single
+intelligent agent or a set of interrelated intelligent agents, which
+autonomously interact following, e.g., a multi-agent paradigm. Every
+single artificial intelligent system can implement one (or more) tasks
+using one (or more) specific approaches/models. For instance an
+``artificial reasoner'' could represent its knowledge in some logical
+formalism and support query answering and inference through automatic
+reasoning (e.g., SAT, ASP); an ``artificial classifier'' could be
+implemented in a deep neural network that is capable to classify
+images into different classes. An ``artificial planner'' can produce
+plans and take decision exploiting classical planning techniques or
+reinforcement learning. To solve complex tasks, different systems and
+methodologies should be integrated. A black box integration of each
+``intelligent agent'' is not sufficient; it is necessary to integrate
+and make all these different approaches to collaborate one another in
+a glass-box method. 
+
+Finally, the intermediate ring represents the interaction between the
+human/environment and the integrated artificial intelligent system.
+The type of interactions that one can see between humans/environment and
+artificial agents happen across a set of artifacts that are
+``shared'' by the humans/environments and the artificial system.
+We briefly describe them here, but we will describe more extensively
+in the rest of the document:
+\emph{Dependability Requirements} are
+artifacts, produced by humans, that specify the expected behaviour and
+some other non-functional properties of the artificial intelligent
+system. Some of them are usually specified in a formal language (that
+has an intuitive semantics for the human) so that it is possible to
+verify automatically that the artificial intelligent system behaves
+according to the requirement to a certain certainty degree.  Some
+of them are not expressed in a formal language and how they can be
+represented in a mathematical structure is an open issue.
+\emph{Actions} are considered in a broader sense. They
+  represent the actions that the artificial agent can perform as well
+  as the action that the human can perform in the direction of the
+  artificial agent. They can be physical actions (that has effects on
+  the environment) or informative actions (that have effects on the
+  knowledge of the human or of the artificial agent). 
+\emph{Observations} are all the data that the artificial
+  intelligent system can collect through its sensors.
+\emph{Explanations:} are artifacts that are produced by an artificial
+  agent that ``explains'' to the human the reason of its
+  behaviour. E.g., the reason why it took an action or a
+  decision. Explanations should be human understandable and acceptable
+  in a rational system shared by the machine and the human. 
+
+
