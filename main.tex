@@ -33,6 +33,14 @@
 \def\I{\mathcal{I}}
 \def\onto{\textsc{AI4EU-Ontology}}
 
+\def\rb#1{\color{blue} RAUL: #1}
+\def\cn#1{\color{red} CHRISTIAN: #1} 
+\def\lo#1{\color{magenta} LUCA: #1} 
+\def\jr#1{\color{purple} JAQUES: #1} 
+\def\as#1{\color{teal} ALESSANDRO: #1} 
+\def\jv#1{\color{violet} JAVIER: #1} 
+\def\ps#1{\color{olive} PETER: #1} 
+\def\ls#1{\color{brown} LUCIANO: #1} 
 
 \title{Foundational aspects of human centered Artificial Intelligence
   in AI4EU}
@@ -83,6 +91,27 @@ the concepts of
   this paper.}
 Such a characterization is important for \dots 
 \end{abstract}
+
+To propose text modification pleas use the following macros: 
+\begin{center}
+\begin{tabular}{ll}
+the command & will produce \\ \hline 
+\verb|\rb{text text text}| & \rb{text text text} \\
+\verb|\cn{text text text}| & \cn{text text text} \\
+\verb|\lo{text text text}| & \lo{text text text} \\
+\verb|\jr{text text text}| & \jr{text text text} \\
+\verb|\as{text text text}| & \as{text text text} \\
+\verb|\jv{text text text}| & \jv{text text text} \\
+\verb|\ps{text text text}| & \ps{text text text} \\
+\verb|\ls{text text text}| & \ls{text text text} \\ \hline 
+\end{tabular}
+\end{center}
+
+To add comment margin comment use the macro 
+$$
+\verb|\todo{comment comment comment}| 
+$$
+that produces \todo{comment comment comment}. 
 
 \input{01_introduction}
 \input{02_key_concepts}
