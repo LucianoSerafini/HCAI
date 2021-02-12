@@ -1,4 +1,5 @@
-\section{Ex.Ve.Co.In.Ph. Artificial Intelligence}
+\section{Explanable, Verifiable and Collaborative AI systems} 
+
 \subsection{Explainable AI} Explanable AI is the problem of providing
 explanations to humans about some inference done by AI agent with it's
 model. Depending on the model different explanations are possible:
@@ -8,7 +9,7 @@ A specific form of explanation is \emph{contrastive explanation}
 \cite{miller2018contrastive} provides a formal framework for
 contrastive explanation by extending \emph{structural causal models}
 \cite{halpern2005causes1}.  The work define the notion of
-\emph{contrastive explanation}, \marginpar{Contrastive explanation}
+\emph{contrastive explanation}, 
 that is the explanation of an event relative to some contrast case, as
 for instances explanations for questions like ``Why P rather than
 Q?''. The proposed formalisation is intended to be general and
@@ -257,6 +258,10 @@ In sintesi:
   \end{description}
   
 \subsection{Verifying AI models}
+
+\todo{add relations between safety and liveness properties of
+  different AI models \dots Raul?}
+
 Verifiable AI consists of the set of methods, techniques and tools
 that support checking key properties of an AI system or a larger
 system that includes AI as one or more key components.  In this part
@@ -327,12 +332,3 @@ in all it's phases.
 \item[Collaboration with agents with action models]
 \item[Collaboration with agents with optimization models]    
 \end{description}
-
-\subsection{In.AI}
-\begin{tikzpicture}
-  \foreach \i/\l in {0/Log,1/Pro,2/Num,3/Act,4/Opt}{
-  \node[draw,circle,minimum width=2cm,align=center] at (2+2*\i,0) {\l};
-   \node[draw,circle,minimum width=2cm,align=center] at (0,-2-2*\i) {\l};};  
-  \end{tikzpicture}
-
-  \subsection{Ph.AI}

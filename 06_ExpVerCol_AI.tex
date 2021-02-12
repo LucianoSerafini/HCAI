@@ -1,0 +1,342 @@
+\section{Ex.Ve.Co.In.Ph. Artificial Intelligence}
+\subsection{Explainable AI} Explanable AI is the problem of providing
+explanations to humans about some inference done by AI agent with it's
+model. Depending on the model different explanations are possible:
+For a survey of XAI see \cite{arrieta2020explainable}
+
+A specific form of explanation is \emph{contrastive explanation}
+\cite{miller2018contrastive} provides a formal framework for
+contrastive explanation by extending \emph{structural causal models}
+\cite{halpern2005causes1}.  The work define the notion of
+\emph{contrastive explanation}, \marginpar{Contrastive explanation}
+that is the explanation of an event relative to some contrast case, as
+for instances explanations for questions like ``Why P rather than
+Q?''. The proposed formalisation is intended to be general and
+applicable to a wide rante of AI models.
+
+\begin{description}
+\item[Explanations of an inference in logical model] Though
+  explanation are manly advocated for inference performed by deep
+  neural networks, explanations are also necessary for inference
+  performed in logical systems, in order to reach human centered
+  artificial intelligence.
+
+  Consider for instance the situation were an
+  agent uses a SAT solver for answering the question $\phi$ posed on a
+  knowledge base $K$. Suppose that $K\models\phi$. This implies that
+  the agent will provide a positive (or negative) answer. But what
+  about the explanation of such an answer?  The Solver will show that
+  $K\cup\{\neg \phi\}$ is not satisfiable and for doing this it will
+  search all the truth assignments without finding one that satisfies
+  $K$ and $\neg\phi$. Showing the trace of the search would not
+  constitute a good explanation. Alternatively the agent could provide
+  a minimal set $K''subset K$ from which is it spossible to derive
+  $\phi$ (i.e., to show that $K'\cup\{\neg \phi\}$ is
+  inconsistent). Still the size of $K'$ might be very big and not
+  understandable by a human. Furthermore, the encoding of the model in
+  the set of axioms $K$ should not be very easy to read by a
+  human. This means that an explanations should also contain the
+  intuitive meaning of the langauge used to formula the knowledge base
+  $K$. When the answer is negative i.e., if $K\not\models\phi$, then
+  an explanation could be given in terms of a counter-model, i.e., an
+  assignment that makes $K$ true and $\phi$ false. This is certainly
+  mre readable than the previous case, but still the meaning of the
+  axioms in $K$ should be conveyed to the human.
+
+  A second method used for doing inference in logical model is to
+  search for a deduction from the set of observations $O$ to the query
+  $\phi$ (or $\neg\phi$), or viceversa find a proof from $\phi$ to $O$
+  or from $\neg\phi$ to $O$. This is the case of explanation.
+  In both cases an explanation is a sequence or a directed graph of
+  formulas with $O$ and $\phi$ (or $\neg\phi$) at the extreme.
+
+  In all the cases explanation is provided in terms of logical
+  symbols. Therefore, to be understandable by humans, humans should be
+  able to ascribe a meaning to these symbols. E.g, an explanation that
+  contains the symbo $p124$ is probably not satisfactory. 
+  
+\item[Explanations of inference in probabilistic model] One of the
+  basic inference task in probabilistic model is called \emph{Most
+    Probable Explanation (MPE)}. MPE is the problem of finding a
+  complete assignment of values to a set of variables that has the maximum
+  likelihood given some variables that are instantiated with some
+  observations. Formally the MPE is the following problem:
+  $$
+  \argmax_{x}Pr(X=x\mid E=e)
+  $$
+  where $E$ and $X$ are disjoint set of random variables. Intuitively
+  the solution of the MPE is a value of $X$ that better explains the
+  observation $e$. This is a rather crude explanation, that does not
+  provide any rational argument behind the final decision of the
+  model. A more sophisticated notion of explanation of the inference
+  in a statistical model is offered by considering causal models
+  \cite{pearl2009causality}, interventions, and counterfactuals.
+  \cite{chajewska2013defining,halpern2005causes1,halpern2005causes2,%
+    sprenger2018foundations,peters2017elements}.  In this case
+  explanation are defined as \dots (TO BE FINISHED)
+
+\item[Explanations of an inference in real function model]
+  The massive interest on explainability has surged due to the success
+  of deep neural network. Various form of explanations has been
+  proposed for the conclusion obtained from a DNN.  A very general
+  definition of explanation of the decision of a real function can be
+  defined with the help of causal models.
+  In particular, in \cite{chattopadhyay2019neural} a deep neural
+  network is seen as a Structural Causal Model \cite{pearl2009causality}
+
+  An alternative approach, which consider only the imput/output pair
+  of the model is by determining the contribution of each single imput
+  feature to the final prediction by using additive feature
+  attributions. 
+
+  \begin{definition}[Additive feature attributions]
+      Suppose $f:\mathcal{X} \rightarrow\mathbb{R}$
+is a model mapping an $M$-dimensional feature space $\mathcal{X}$ to realvalued
+predictions. Additive feature attributions for $f(\mathbf{x})$ at
+input $\mathbf{x}=(x_1,\dots,x_M)\in\mathcal{X}$, 
+comprise of a reference (or baseline) attribution $\phi_0$ and a set
+of feature attributions $\phi_1,\dots,\phi_n$ such that $f(\mathbf{x}) =
+\phi_0+\sum_{i=1}^M\phi_i$. 
+\end{definition}
+According to the previous definition $\phi_i$ is the contribution of
+the feature $x_i$ to the decition $f(\mathbf{x})$. 
+
+
+  
+\item[Explanations of an inference in action model] Action models
+  include planning model, reinforcement learning models and game
+  theoretic models. For each of the type of model a specific notion of
+  explanations has been developed. In the following we quickly analyse
+  them.
+  
+  \paragraph{Explanations in Planning} The approaches and the
+  challenges of explanation in planning are described in
+  \cite{chakraborti2020emerging}, which defines the different forms of 
+  \emph{explanations of a plan or a policy as a solution of a given
+    planning problem}. A planning problem is composed of a planning
+  domain and a desired property (goal + optimality condition, \dots).
+  The solution of a planning problem is a plan or more generally a
+  policy i.e., a function $\pi: S\rightarrow A$ that select the
+  actions to execute if the agent is in a specific state.
+  \begin{align}
+    \label{eq:plannin-decision}
+  \Pi, \pi\models \tau
+  \end{align}
+  means that, $\tau$ can be achieved by following the policy $\pi$
+  in the planning domain $\Pi$. 
+  An explanation of the decision \eqref{eq:plannin-decision} 
+  is an artifact $\mathcal{E}$ ``understandable by the explanee'' such that
+  $$
+  \mathcal{E},\pi\models_u\tau 
+  \mbox{ and }
+  \mathcal{E},\pi'\not\models_u\tau
+  \mbox{ 
+    for all $\pi'$ different from $\pi$.}
+  $$
+  The content of the
+  explanation $\mathcal{E}$ can vary greatly depending on the needs of
+  the explainee.
+  
+  \paragraph{Explainable reinforcement learning}
+  For a survey in explanations in Reinforcement Learning see
+  \cite{puiutta2020explainable}. We report here two approaches that
+  provide a clear and formal definition of explanation in
+  reinforcement learning. 
+  
+    \cite{sequeira2019interestingness} proposes an explainable reinforcement learning
+    (XRL) framework that analyzes an agent’s history of interaction
+    with the environment to extract interestingness elements that help
+    explain its behavior. In a nutshell the explanation of the
+    behavious of the agent is provided in terms of four aggregations
+    values about the interaction the agent has with the enviroment.
+    In particular suppose that the agent interaction is the following
+    sequence
+    $$
+    t= z_0,a_1,r_1,z_1,a_2,r_2,\dots z_{n-1},a_n,r_n,z_n
+    $$
+    they propose to ``explain'' the behavious of the agent in terms of
+    Frequency, Transition Value, Execution Certainty, Sequences, which
+    can be computed starting from the trace $t$.
+
+    From the same data (trace $t$) \cite{madumal2019explainable} learn
+    a causal model as defined in \cite{halpern2005causes1} from which
+    they are capable to provide counterfactual explanations of why an
+    action has (not) been executed in a certain state $s$.  The causal
+    model is a DAG where state variables are linked trough actions,
+    intuitively $X\stackrel{\rightarrow}{A} Y$ where $X$, and $Y$ are
+    state variables and $A$ an action, suggests that the value of $Y$
+    after the execution of $A$ depends on the value of $X$.  The
+    leaves nodes of the DAG correspond to the rewards.  The
+    explanation of ``why the action $a$ in state $s$'' is given in
+    terms of the values of the variables entering in the action $A$,
+    and the values of the variables entering in the final reward.  The
+    explanation of ``why not action $b$ in state $s$'' is given in
+    terms of conterfactual explanation. I.e., by comparing the
+    explanation of $a$ in $s$ and the explanation of $b$ in $s$.
+    
+    \paragraph{Explanation in Game theory}
+    No specific method has been found for explaining decisions taken by
+    game theoretic models. Instead game theoretic approaches have been
+    used to provide explanations in other models. 
+    \cite{merrick2019explanation} proposes a general game theoretic
+    method to generate explanations based on additive feature
+    attributions.
+
+  \item[Explanations of an inference in optimization model] One of the
+    most important application domain of optimization is
+    scheduling. Explanation is scheduling has been defined in
+    \cite{vcyras2019argumentation} via argumentation.  The aurthors
+    formally define argumentative explanations as to why a given
+    schedule is not ‘good’. We can define the framework very
+    abstractly as follows; Let $M$ be a makespan problem and $S$ be an
+    optimal and feasible schedule for $M$. Then we write
+    $$
+    M,S \models O \wedge F \wedge D
+    $$
+    where $O$ is a formula expressing the optimality condition w.r.t.,
+    a partial order $<_S$ on the set of schedules. 
+    $F$ is a formula expressing the feasibility condition imposed in $M$
+    and $D$ if a formula expressing the desiderata (from the user),
+    i.e., a subset of schedules. 
+    The proposed approach provide explanations for 
+    $$
+    M,S\not\models O 
+    $$
+    by finding a schedule $S'\neq S$ with better perfornmance w.r.t.,
+    $S$.
+    The explanation of 
+    $$
+    M,S\not\models F
+    $$
+    By finding the minimal $M',S'\subseteq M,S$ such that
+    $M',S'\not\models F$. Similarly, the explanation of
+    $$
+    M,S\not\models D
+    $$
+    is provided by finding a minimal subpart of $S'\subseteq S$
+    such that for all $S'\not\subseteq S''$ for all $S''\in O$> 
+
+    {\color{red}FROM MICHELE \tt
+
+      1) Visto che la maggior parte dei sistemi di ottimizzazione si
+      basano su modelli definiti da esperti, il problema della
+      spiegazione è decisamente meno sentito.
+
+      Un esperto non ha in generale difficoltà ad interpretare una
+      soluzione. Anche nel caso il modello sia un po’ convoluto
+      (capita in SAT e MILP in particolare), è generalmente facile
+      presentare una sua soluzione in termini naturali per un esperto.
+
+      2) Parecchio lavoro è stato dedicato allo spiegare l’ottimalità
+      o l’infeasibility (i.e. perché una certa soluzione è ottima, o
+      cosa la rende infeasible).
+
+      Questi temi però non li trovi associati al termine
+      “explainability”, perché è nato molto più tardi. Si parla invece
+      di:
+
+      - Irreducible Infeasible Sets (in MILP)
+      
+      - Conflicts (in CP e SAT)
+      
+      - reduced costs (come  prova di ottimalità in LP)
+      
+      - Minimal Critical Sets (in scheduling)
+      
+
+      Addirittura c’è gente che usa questi approcci per spiegare le
+      predizioni delle deep network (dopo averle tradotte in modelli
+      simbolici).
+
+In sintesi:
+
+1) Il temine “explainability” non è di sicuro molto usato in contesto di ottimizzazione
+2) Il problema di  spiegare modelli e soluzioni non è molto sentito, se non in alcuni contesti specifici (vedi sopra).
+3) Detto questo, qualcosa potenzialmente da fare ci sarebbe. Per esempio, i vari approcci per l’individuazione di conflitti etc. hanno tradizionalmente una finalità tecnica: i  conflitti estratti sono utili per i solver, ma non necessariamente chiari per un  essere umano.
+    }
+  \end{description}
+  
+\subsection{Verifying AI models}
+
+\todo{add relations between safety and liveness properties of
+  different AI models \dots Raul?}
+
+Verifiable AI consists of the set of methods, techniques and tools
+that support checking key properties of an AI system or a larger
+system that includes AI as one or more key components.  In this part
+we concentrate only in the verification of the AI component of a
+system, i.e., the AI model. In general we can distinguish between
+functional and non functional requirements. Non functional
+requirements specifies how the sistem should be rather than what it
+should do. Since we consider `abstract AI models'' we focus on
+verification of functional requirements on how the model and behaves
+in all it's phases. 
+  
+ \begin{description}
+ \item[Verifying logical models] The behavior of a logical system is
+   encoded in the logic itself, and once one is able to encode the
+   conditions that the system should comply in terms of a set of pairs
+   of formulas $\left<\phi_o,\phi_a\right>$ where $\phi_o$ are the
+   properties of the input observation and $\phi_a$ encodes the
+   property of the decision/action taken by the system, then the one
+   can check if 
+   $$
+   M_L, \phi_o \models \phi_a
+   $$
+   and it will be guaranteed that whenever the model receives in input
+   an observation that satisfies $\phi_o$, (i.e., $O\models \phi_o$)
+   then the output generated will necessarily be an action that
+   satisfies (or is consistent with) $\phi_a$.
+   
+ \item[Verifying probabilistic models]
+   Formal verification of bayesian networks \cite{pmlr-v72-shih18a}
+   Probabilistic model checking \cite{kwiatkowska2018probabilistic}
+
+ \item[Verifying numerical models] According to
+   \cite{kohli2019towards}, there are three main groups of
+   verification tasks Adversarial Testing, Robust learning, and Formal
+   Verification. There are many works in the area of formal
+   verification of neural networks and other numerical model.
+   However, one of the most importan element of the models which are
+   learned via supervision, are the properties of the training data.
+   Important aspects to be verified are also the fact that the system
+   don't use certain critical data to do the prediction.
+
+   \cite{narodytska2018formal} discusses a set of interesting
+   properties of neural network, including properties that relate
+   inputs and outputs of the network, e.g. robustness and
+   invertibility, and properties that relate two networks, like
+   network equivalence. For instance one property of the neural
+   network is global $\epsilon$-robustness. 
+
+   A feedforward neural network $f:\R^n\rightarrow \{0,1\}^m$ is
+   globally $\epsilon$-robust if for any $x,\tau\in\R^n$ with
+   $||\tau||_{\infty} \leq \epsilon$, $f(x+\tau)=f(x)$. 
+   
+ \item[Verifying action models]
+   model checking \cite{clarke2018introduction} and
+   probabilistic model checking \cite{kwiatkowska2018probabilistic}
+   Formal verification of reinforcement learning
+   \cite{van2017challenges}
+   
+ \item[Verifying optimization models]
+   
+\end{description}
+
+\subsection{Co.AI}
+\begin{description}
+\item[Collaboration with agents with logical models]
+\item[Collaboration with agents with probabilistic models]
+\item[Collaboration with agents with numerical models]
+\item[Collaboration with agents with action models]
+\item[Collaboration with agents with optimization models]    
+\end{description}
+
+\subsection{In.AI}
+\begin{tikzpicture}
+  \foreach \i/\l in {0/Log,1/Pro,2/Num,3/Act,4/Opt}{
+  \node[draw,circle,minimum width=2cm,align=center] at (2+2*\i,0) {\l};
+   \node[draw,circle,minimum width=2cm,align=center] at (0,-2-2*\i) {\l};};  
+  \end{tikzpicture}
+
+  \subsection{Ph.AI}
