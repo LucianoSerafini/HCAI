@@ -1,0 +1,145 @@
+\section{Artificial Intelligent Models}
+An AI agent takes decisions on how to act in the environment or how to
+react to some input given by the humans and/or by the environment, on
+the basis of one or more \emph{models} of the surrounding environment
+and of the humans it is currently interacting with. Models are
+abstract (computational) structures that allow to answer queries about
+what holds in the current or in the past situation and to predict what
+will be true/false in the future. Models can also be used to simulate
+possible evolutions of the humans-environment in order to take the
+``right'' decision now.
+
+Artificial intelligent agents are equipped with a set of artificial
+intelligence models that represent the knowledge of the agent about
+the environment. Such a knowledge is used to support the agent in
+making decisions about which action to perform. In general we cannot
+assume that such models are \emph{correct}, i.e., that their
+predictions are effectively true.  For this reason it is more
+appropriate to speak about \emph{belief} instead of knowledge Neither
+we can assume that models are \emph{complete} i.e., that they describe
+the environment in all it's details. Indeed they are
+\emph{simplified/abstract} representations of some aspect of the
+environment obtained by abstracting away irrelevant (believe to be
+irrelevant) details.
+
+\subsection{Types of Models}
+
+Providing a complete and coherent classification or even an ontology
+of AI models is an ambitious goal, which probably is not reachable
+within the time frame of this projects, however, we believe that an
+initial classification is emerging from the AI research community. In
+this classification we take a ``technological'' perspective. i.e., we
+list different classes on the basis of the set of methodologies which
+are used to specify, to represent, and to perform decision within this
+model. In particular we will distinguish the following macro classes
+of models.
+
+
+\begin{itemize}
+\item \emph{logical models:} the key aspects of the environment and
+  the human are represented with a logical theory (set of formulas of
+  a logical/formal language) and decision on the basis of this model
+  are taken via logical reasoning. Examples of this type of model are
+  Logical Knowledge Bases and Ontologies, Logic programs, classical
+  planning domains specified via strips or some other action language,
+  \dots.  Logical models are specified declaratively with a set of
+  terms and formulas from a logic based requirement language. A good
+  summary of all different logical models is provided in the book
+  \cite{lifschitz2008handbook}. Logical models provide information of
+  what is true, what is false and what logically follows from some
+  premises.  To have an overview of all the type of models, how they
+  can build and how they can used for decision making, planning and
+  inference one can refer to the book \cite{minker2012logic}.
+
+\item \emph{probabilistic models:} the key aspects of the environment
+  and the human are represented by some probabilistic
+  distribution. Decision are taken on the basis of probabilistic
+  inference. Examples of this type of models are statistical graphical
+  models (e.g., Bayesian networks, hidden Markov models, \dots).
+  \begin{quote}
+  \it The knowledge and beliefs of
+cognitive agents are modeled using probability distributions
+defined over structured systems of representation,
+such as graphs, generative grammars, or
+predicate logic. This development is crucial for making
+probabilistic models relevant to cognitive science, where
+structured representations are frequently viewed as
+theoretically central. Second, the learning and reasoning
+processes of cognitive agents are modeled using
+advanced mathematical techniques from statistical
+estimation, statistical physics, stochastic differential
+equations, and information theory
+\hfill \cite{chater2006probabilistic}
+\end{quote}
+Probabilistic models can be specified by directly providing the joint
+probability density/mass function of the variables, or via
+directed/undirected graphical models. Usually in probabilistic models
+there are a set of observable variables (corresponding to the
+data/evidences that an agent is capable to observe directly) and a set
+of hidden variables, which distribution should be discovered from the
+data.
+
+The key concept in this type of model is the \emph{variable assignment},
+i.e., an assignment to all the random variables, on which it is
+possible to apply the model in order to predict the likelihood of such
+an assignment.
+
+\item \emph{Real Functional Models:} the key aspects of the worlds and
+  the user are represented through (a set of) real functions that
+  takes in input observable quantities and produces an estimation of
+  some unobservable quantity. Examples of this type of models are
+  Linear models, support vector machines, decision trees, random
+  forest and (deep) neural networks.
+
+  A large classo fo ``real funciton models'' is constituted by neural
+  network models. A neural model is a graph of nodes. Each node is
+  associated with a non linear activation function, the imput of a
+  node n is a linear combination of the output of the function
+  associated to nodes that precede n. Both the linear combination and
+  the activation funciton are associated with a set of parameters,
+  that need to be instantiated in order to fully define the
+  function. A neural network model is also associated to a Loss (or
+  Cost) function, that determines a cost in terms of the input and the
+  output values of the network.
+
+  The key concept of a neural network consists in the instantiation of the parameters.
+
+  For every instantiation of it's parameters, a neural network
+  computes a function $f:R^k\rightarrow R^h$ where $k$ is the number
+  of "imput" nodes (i.e., the nodes that don't have any predecessor)
+  and h is the number of the output nodes (i.e., the nodes which are
+  not predecessor of any other node). The main objective in neural
+  network is to find the instantiation of the parameters, that
+  minimizes the Loss/Cost function.
+
+\item \emph{Decision models} models the expected advantage an agent
+  can obtain in following a certain policy (= action selection
+  strategy). The tipical reward based model are Markov decision
+  models, which constitute the basis of reinforcement learning. The
+  key aspect of decision models is the fact that they represent the
+  effect of taking actions in terms of reward for an agent. Both in
+  reinforcement learning and game theory the main task in this model
+  is to produce a policy that maximizes the expected rewards.
+
+\item \emph{Optimization models} An optimization model has three main
+  components: (i) An objective function. This is the function that
+  needs to be optimized. (ii) A collection of decision variables. The
+  solution to the optimization problem is the set of values of the
+  decision variables for which the objective function reaches its
+  optimal value. (iii) A collection of constraints that restrict the
+  values of the decision variables.
+
+
+\end{itemize}
+
+In many cases a model presents charachteristics that are common to
+more than one of the classes described above. We call them \emph{hybrid
+  models}. Hybrid models are models that attempts to integrate some of
+the previous type of models. Examples of such models are approaches
+that integrates logical and numerical models (e.g., Logic Tensor
+Networks, Lyrics, \dots) approaches that integrate logical and
+statistical models (e.g., Markov Logic Networks and Probabilistic
+Logic Programming), and finally approaches that integrate numeric,
+statistical and logical models (e.g., DeepProbLog, deep probabilistic
+logic programming, and Probabilistic Soft Logic)
+

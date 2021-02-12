@@ -1,0 +1,85 @@
+\documentclass{llncs}
+\usepackage{hyperref}
+\usepackage[utf8]{inputenc}
+\usepackage{url}
+\usepackage{tikz}
+\usetikzlibrary{calc,positioning}
+\usetikzlibrary{decorations.text}
+\usetikzlibrary{arrows.meta}
+\usetikzlibrary{decorations,backgrounds, shapes, shadows}
+\usepackage{pgfplots}
+\usepackage{amsmath,amsfonts}
+\usepackage[stable]{footmisc}
+\usepackage{authblk}
+\usepackage{xcolor}
+\usepackage{graphicx}
+\graphicspath{{./Figures/}}
+\usepackage[shortlabels]{enumitem}
+\usepackage{multicol}
+\usepackage{multirow}
+\usepackage{comment}
+%\usepackage[disable]{todonotes}
+\usepackage{todonotes}
+\DeclareMathOperator*{\argmax}{argmax}
+\DeclareMathOperator*{\argmin}{argmin}
+\def\paragraph#1{\subsubsection{#1}}
+\def\realWorldInterpretation{\mathcal{R}}
+\def\Axioms{\mathcal{A}}
+\def\Observations{\mathcal{O}}
+\def\logicalModelInstantiation{\Observations2\L}
+\def\R{\mathbb{R}}
+\def\L{\mathcal{L}}
+\def\T{\mathcal{T}}
+\def\I{\mathcal{I}}
+\def\onto{\textsc{AI4EU-Ontology}}
+
+
+\title{Foundational aspects of human centered Artificial Intelligence
+  in AI4EU}
+\author{
+Raul Barbosa \inst{1} \and
+Luca Iocchi \inst{2} \and
+Christian Napoli\inst{3} \and
+Jacques Robin\inst{4}  \and 
+Alessandro Saffiotti\inst{5} \and 
+Javier V\'azquez-Salceda\inst{6} \and 
+Peter Sch\"uller\inst{7} \and 
+Luciano Serafini\inst{8}}
+
+\date{\today}
+\institute{
+\email{rbarbosa@dei.uc.pt} \and
+\email{cnapoli@diag.uniroma1.it} \and
+\email{iocchi@diag.uniroma1.it} \and
+\email{Jacques.Robin@univ-paris1.fr} \and
+\email{alessandro.saffiotti@oru.se} \and
+\email{jvazquez@cs.upc.edu} \and 
+\email{peter.schueller@tuwien.ac.at} \and 
+\email{serafini@fbk.eu} 
+}
+
+\begin{document}
+\maketitle
+
+\begin{abstract}
+
+In this paper we want to highlight some of the foundational characteristics
+of an artificial (software or physical) agent that contains some
+\emph{artificial intelligence} component and that it is \emph{human
+  centered}, i.e., it is supposed to interact and collaborate with
+humans. The definition of the set of basic concepts should contribute
+to the creation of the \onto. 
+\end{abstract}
+
+\input{01_introduction}
+\input{02_key_concepts}
+\input{03_ai_models}
+\input{04_lifecycle}
+\input{05_lifecycle_for_each_model}
+\input{06_EVCIP_AI}
+\input{07_ontology}
+\input{08_conclusions}
+
+\bibliographystyle{abbrv}
+\bibliography{biblio}
+\end{document}
