@@ -51,7 +51,9 @@ also be provided as input.
 
 \begin{definition}
 The \emph{observations} of an AI agent are all the data that an agent
-can observe at any possible point of its evolution. 
+can observe at any possible point of its evolution.
+\todo{data and attributes such as the type}
+\todo{point of its evolution vs. instant of its execution}
 \end{definition}
 
 \subsection{Actions}
@@ -124,8 +126,8 @@ argument. However what is most important is that the human should be
 able to decide to accept or not accept such an argument.
 
 In general an explanation of a decision taken by the agent can be
-independend from how the agent reaches such a decision. This is
-expecially true when the decision is taken by a black-box method such
+independent from how the agent reaches such a decision. This is
+especially true when the decision is taken by a black-box method such
 as a neural network. 
 
 A deductive argument is an argument in which it is thought that the
@@ -156,15 +158,14 @@ a set of input data $O$, which is acceptable by the human.
 \end{definition}
 
 \subsection{Requirements}
-A requirement, or dependability requirement, is an artifact that
-describes a set of required behaviors of an artificially intelligent
-system. This is central to the problem of verifiable AI, which has the
-objective of verifying that the systems meets its dependability
-requirements. 
+A requirement, including the concept of dependability requirement, is the formulation of a functional need that an  artificially intelligent
+system must satisfy. This is central to the problem of verifiable AI, which has the
+objective of checking that the systems meets its
+requirements, including the functional specification and the dependability attributes. 
 Dependability requirements are expressed in a human understandable
 way, they are indeed formulated by humans. Then the problem of
 verifiable AI, is how to translate these requirements in algorithms
-that verify that the system is compliant with them. 
+that check that the system is compliant with them. 
 Being a human produced artifact, providing a sharp definition of
 (dependability) requirement is rather complex if not impossible. In
 the examples provided in this overview document (e.g., automotive and
