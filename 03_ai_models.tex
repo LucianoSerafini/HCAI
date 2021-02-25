@@ -2,7 +2,11 @@
 \todo{from model categorization to model use cases}
 
 Providing a complete and coherent classification or even an ontology
-of AI models is an ambitious goal, which probably is not reachable
+of AI models is an ambitious goal,
+%
+\as{But why should we have such a goal in this paper? (See also my concern at the start of the next Section.)}
+%
+which probably is not reachable
 within the time frame of this projects, however, we believe that an
 initial classification is emerging from the AI research community. In
 this classification we take a ``technological'' perspective. i.e., we
@@ -63,25 +67,26 @@ an assignment.
 
 \item \emph{Real Functional Models:} the key aspects of the worlds and
   the user are represented through (a set of) real functions that
-  takes in input observable quantities and produces an estimation of
+  take in input observable quantities and produces an estimation of
   some unobservable quantity. Examples of this type of models are
   Linear models, support vector machines, decision trees, random
   forest and (deep) neural networks.
 
-  A large classo fo ``real funciton models'' is constituted by neural
+  A large class of ``real function models'' is constituted by neural
   network models. A neural model is a graph of nodes. Each node is
-  associated with a non linear activation function, the imput of a
+  associated with a non linear activation function, the input of a
   node n is a linear combination of the output of the function
   associated to nodes that precede n. Both the linear combination and
-  the activation funciton are associated with a set of parameters,
+  the activation function are associated with a set of parameters,
   that need to be instantiated in order to fully define the
   function. A neural network model is also associated to a Loss (or
-  Cost) function, that determines a cost in terms of the input and the
-  output values of the network.
+  Cost) function, that determines the approximation error (i.e., difference between known and predicted outputs) to be minimized.
+  %LI: replaced "between know values in terms of the input and the  %output values of the network".
 
   The key concept of a neural network consists in the instantiation of the parameters.
+  lo{this is true for all ML models...}
 
-  For every instantiation of it's parameters, a neural network
+  For every instantiation of its parameters, a neural network
   computes a function $f:R^k\rightarrow R^h$ where $k$ is the number
   of "imput" nodes (i.e., the nodes that don't have any predecessor)
   and h is the number of the output nodes (i.e., the nodes which are
@@ -89,9 +94,9 @@ an assignment.
   network is to find the instantiation of the parameters, that
   minimizes the Loss/Cost function.
 
-\item \emph{Decision models} models the expected advantage an agent
+\item \emph{Decision models} model the expected advantage an agent
   can obtain in following a certain policy (= action selection
-  strategy). The tipical reward based model are Markov decision
+  strategy). The typical reward based model are Markov decision
   models, which constitute the basis of reinforcement learning. The
   key aspect of decision models is the fact that they represent the
   effect of taking actions in terms of reward for an agent. Both in
@@ -108,7 +113,7 @@ an assignment.
 
 \end{itemize}
 
-In many cases a model presents charachteristics that are common to
+In many cases a model presents characteristics that are common to
 more than one of the classes described above. We call them \emph{hybrid
   models}. Hybrid models are models that attempts to integrate some of
 the previous type of models. Examples of such models are approaches

@@ -1,37 +1,43 @@
 \section{Introduction}
 
 % \paragraph{Agent-Environment pair} 
-We consider a reference framework composed of an artificial
-intelligent agent (or simply agent) that operates in an
-environment. We call this framework the agent-environment framework. In an
+
+\lo{I would mention humans immediately in the reference framework, otherwise the human-centered part of the concept will not be clear. What about an agent-human-environment framework? in which human is at the center?}
+
+\as{I agree.  If we propose "foundations for human-centered AI" we should first say what we mean by "human-centerd AI", and then explain why foundations are needed for it.}
+
+\jr{In the definition we can cite the HLEG AI guidelines of Trustworthy AI, https://ec.europa.eu/futurium/en/ai-alliance-consultation/guidelines}
+
+We consider a reference framework composed of an \jr{HCAI} agent (or simply agent) that operates in an
+environment \lo{"in presence of humans"...}. We call this framework the agent-environment framework. In an
 agent-environment framework there is a clear division between what is
 internal to the agent, and what is external to the agent, i.e., the
-environment. The agent perceives the environment via sensors, and
-modifies the environment via actions. Every interaction between the agent
-and the environment happens through these two categories. Action and sensors
-are considered in a very broad sense. Sensors range from low level
+environment. The agent \jr{observes} the environment via sensors, and \jr{acts upon} 
+modifies the environment via \jr{effectors}. Every interaction between the agent
+and the environment happens through these two categories. \jr{Observations and actions}
+are considered in a very broad sense \todo{observation or percept, not sensors, are the input concepts corresponding to action as output concept. Sensor is the input concept corresponding to the effector input concept}. Sensors range from low level
 sensors to input in natural language, images, movies, etc.  Actions
 may range from physical actions, as moving ahead, moving an arm,
-grasping an object, to communicative actions, such as sowing some data
+grasping an object, to communicative actions, such as jr{displaying} some data
 on the screen, uttering a sentence, smiling, or playing a song or a
 movie. In general
 there is no synchronisation between actions and observations, and both
 actions and observations can happen independently without following a
 precise protocol.  Finally the environment may change due the the effect
 of some agent's action, or it may change due to some external cause,
-which is not controlled by the agent (e.g., some other agent can
-operate in the environment)
+which is not controlled by the agent (e.g., \jr{a human} agent can
+operate in the environment) \todo{I took out "some other agent" since the abstract mentions that we restrict the scope of our paper to single agent systems. BTW should we and why? :)}.
 
 % \paragraph{Goal directed agents} 
-An AI agent always has one or more goals to achieve. At a given
+An AI agent always has one or more goals to achieve\footnote{\jr{The so-called \emph{reflex} agents \cite{aima4}, which internal architecture reduces to a single reasoning component that directly maps observations to actions do not internally maintain an explicit representation of their goals. Even in this case, the mapping function or rule base that implements their reflexes are nevertheless programmed or machine learned with some implicit goal in mind for these agents to achieve.}}. At a given
 time-point of its life, some goals can be completely
 achieved (and therefore these are not goals anymore), some of them can be
 partially achieved, and for other the agent does not have a plan to
-achieve them.  In order to
-achieve its goal(s) an AI agent can autonomously execute actions (e.g.,
+achieve them. In order to
+achieve its goal(s) an \jr{HCAI} agent can autonomously execute actions \todo{too much content in parentheses, hard to read} (e.g.,
 an autonomous agent with a planner obtains these actions by planning)
 or some external event may happen so that the agent will get closer to
-the goal (e.g., a classifier is trained with new labelled data).
+the goal \todo{Jacques: I do not think this is the best example of "external event" bringing the agent closer to its goal; a simpler, more human-centric example would be \emph{a human collaborating with the agent carries out an action that bring them both closer to their common goal.} (e.g., a classifier is trained with new labelled data)}.
 Goals in agents exist on several levels: (i) beneficial properties of
 a model and its reasoning on the level of model schema (including
 algorithm) design, (ii) high performance (correctness and/or
@@ -107,7 +113,7 @@ environment where humans operate.
     \input{onion}
 \end{center}
 \caption{\label{fig:hcai-onion} The Human-Centered Artificial
-  Intelligence}
+  Intelligence \cn{I think that we will be required to explain better the figure with a more ``extensive" caption, as well as define human (H) and environment (E). We could change it like that: ``A simple schematization of Human-Centered Artificial Intelligence represented as an set of agents acting as an integrated artificial intelligent systems (external ring) and their interactions (inner ring) with respect to humans (H) and environment (E)"}}
 \end{figure}
 
 The external ring in Figure~\ref{fig:hcai-onion} represents the

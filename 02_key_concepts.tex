@@ -23,7 +23,11 @@ sensors. Here we mean sensor in a broad sense, i.e., everything that
 can be used by the artificial intelligent agent to autonomously
 acquire data about the environment (including the humans) and
 everything the humans and the environment can use to input data to the
-artificial intelligent agent.  Observations are collected via
+artificial intelligent agent. 
+%
+\as{I like this general viewpoint.}
+%
+Observations are collected via
 sensors. There are thousands of types of sensors, and they all serve
 their purpose depending on what part of the environment they
 sense. Every single pilot in the project has defined a different set
@@ -92,7 +96,11 @@ executed by the environment or by the human. As we explained before,
 they are part of the Observations.
 
 An important aspect of the actions in human centered AI is that they
-should be relevant for the human. For instance in a ranking system,
+should be relevant for the human. 
+%
+\as{This is a very important point, that differentiates foundations for "human-centered" AI from others. The previous examples of actions only depend on the actor.  Here, you say that actions depend only on the human, or "receiver".  This definition seems to entails that actions in a HCAI system are relations between the (AI) actor and a (human) counterpart: it's a bit like affordances.  Interesting, but tricky\ldots\ And not really what Def~2 below is saying.}
+%
+For instance in a ranking system,
 the user might be interested only in the first 10 documents. In this
 case, though the outcome of the system is an entire ranking of all the
 documents, the actions which are relevant for the human are only the
@@ -114,6 +122,15 @@ information as outcome.
   environment in which the agent operate.
 \end{definition}
 
+\lo{This definition explains that actions should produce a tangible effect on humans or on the environment. 
+Does it include outcomes at the knowledge level?
+Is pure reasoning (i.e., an agent taking a decision about something) an action?
+The example above of the classifier should be better explained. I see two different actions: a) deciding the output of the classifier, b) communicating to a human the decision.
+Action a) affects only the agent's knowledge, action b) affects also human knowledge.
+I think we should make this concept more explicit.
+In particular, we should highlight communication actions that have the goal and the effect of sharing knowledge between agents.
+} 
+
 \subsection{Explanations} 
 An explanation is an argument that a human can understand and can
 accept. To be understandable the explanation should be given in a
@@ -124,6 +141,8 @@ justifies a the conclusion of the artificial agent starting from the
 given input. This argument can be a deductive or an inductive
 argument. However what is most important is that the human should be
 able to decide to accept or not accept such an argument.
+
+\as{While Observations and Actions were very general, here the scope is more limited.  Inductive and deductive arguments do not seem to capture decision based on counterfactual reasoning ("I did A because if I did B I would have died"), or planning ("I will do A, B, C because then D will become true").  Or maybe they do?}
 
 In general an explanation of a decision taken by the agent can be
 independent from how the agent reaches such a decision. This is
@@ -154,8 +173,10 @@ a set of input data $O$, which is acceptable by the human.
   intelligent agent as a reaction of the observations 
   $O$, is an argument in the deductive/inductive system $DIS$
   of the fact that $A$ follows from $O$, i.e., it is a proof $\pi$ of
-  $O\models_{DIS} A$
+  $O\models_{DIS} A$ \cn{maybe ``reaction {\bf to an} observation $O$"}
 \end{definition}
+
+\as{See my previous comment: limiting the focus of explanations to "proofs" seems a bit limiting, unless you have in mind a more general notion of proof which I am missing here.}
 
 \subsection{Requirements}
 A requirement, including the concept of dependability requirement, is the formulation of a functional need that an  artificially intelligent
@@ -197,6 +218,10 @@ should be satisfied at least 99\% of the time.
   in some mathematical structure. This could be the subject of further
   study in the project. 
 \end{description}
+
+\todo{Introduce non-determinism as a source of verification challenges.}% single-agent (the AI agent) and non-deterministic environments, sensors and actuators. This is what we have also in the “onion”, i.e., observations (produced by sensors) and actions (Produced by actuators); if humans are taken into account. They act independently from the artificial agent, and therefore they are a source of indeterminism in the environment. Explain how this leads us into safety and liveness properties, and notions of fairness; temporal logics may be applied as a means to specify such requirements.
+
+% NOTE: We may need a model of the environment and, possibly, a model of the human. Notice that there is non-determinism so the actions of our agent may have differing outcomes. However, modelling a human is very difficult so we need to make very loose assumptions with this respect.
 
 \subsection{Artificial intelligent models} 
 An AI agent takes decisions on how to act in the environment or how to

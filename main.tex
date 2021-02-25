@@ -33,14 +33,14 @@
 \def\I{\mathcal{I}}
 \def\onto{\textsc{AI4EU-Ontology}}
 
-\def\rb#1{\color{blue} RAUL: #1}
-\def\cn#1{\color{red} CHRISTIAN: #1} 
-\def\lo#1{\color{magenta} LUCA: #1} 
-\def\jr#1{\color{purple} JAQUES: #1} 
-\def\as#1{\color{teal} ALESSANDRO: #1} 
-\def\jv#1{\color{violet} JAVIER: #1} 
-\def\ps#1{\color{olive} PETER: #1} 
-\def\ls#1{\color{brown} LUCIANO: #1} 
+\def\rb#1{{\color{blue} RAUL: #1}}
+\def\cn#1{{\color{red} CHRISTIAN: #1}}
+\def\lo#1{{\color{magenta} LUCA: #1}}
+\def\jr#1{{\color{purple} JACQUES: #1}}
+\def\as#1{{\color{teal} ALESSANDRO: #1}}
+\def\jv#1{{\color{violet} JAVIER: #1}}
+\def\ps#1{{\color{olive} PETER: #1}}
+\def\ls#1{{\color{brown} LUCIANO: #1}}
 
 \title{Foundational aspects of human centered Artificial Intelligence
   in AI4EU}
@@ -48,7 +48,7 @@
 Raul Barbosa \inst{1} \and
 Luca Iocchi \inst{2} \and
 Christian Napoli\inst{3} \and
-Jacques Robin\inst{4}  \and 
+Jacques Robin\inst{4} \and 
 Alessandro Saffiotti\inst{5} \and 
 Javier V\'azquez-Salceda\inst{6} \and 
 Peter Sch\"uller\inst{7} \and 
@@ -74,24 +74,18 @@ Luciano Serafini\inst{8}}
 \todo{invite somebody from Explanable AI}
 
 \begin{abstract}
-This paper addresses foundational aspects of \emph{human centered
-artificial intelligent agents}, which are physical or software agents, with 
-artificial intelligence components, constructed to interact and collaborate with
-humans.
-The article identifies five main concepts that characterise an
-Artificial Intelligence system: 
+This paper addresses foundational aspects of \emph{\jr{Human Centered
+Artificial Intelligent (HCAI)} agents}, which are physical or software agents, with \jr{AI} components, constructed to interact \jr{or} collaborate with humans.
+The article identifies five main concepts that characterise an \jr{HCAI} agent:
 \emph{Observation}, \emph{Requirement}, \emph{Action}, \emph{Explanation} and \emph{AI Model}. 
-Based upon these concepts, we propose a characterisation of 
-the concepts of 
+Based upon these, we propose a characterisation of the \jr{qualifiers} of 
 \emph{Explainable AI}, \emph{Collaborative AI}, \emph{Verifiable
-  AI}, and the relationship between these. 
-We restrict the analysis to scenarios consisting of single-agent deterministic environments.
-\todo{Alternative scope: Our analysis includes single-agent deterministic environments
-as well as multi-agent and non-deterministic environments, sensors and actuators.}
+  AI}, and the relationship between them. 
+We focus the analysis on scenarios consisting of a single agent operating in non-deterministic environments
+\lo{I would add something like "interacting with people" or "in presence of humans"...}.
 \todo{Add a sentence that explains the utility of the contribution of
   this paper.}
-Such a characterisation is important for \dots
-developing AI agents that fulfil the intended function correctly. This requires all artefacts to be amenable to analysis and comprehension by humans, starting from the foundations rather than retrofitted into existing approaches.
+Such a characterisation is important for developing AI agents that fulfil their intended function correctly. This requires all artefacts to be amenable to analysis and comprehension by humans, starting from the foundations rather than retrofitted into existing approaches.
 \end{abstract}
 
 To propose text modification pleas use the following macros: 
