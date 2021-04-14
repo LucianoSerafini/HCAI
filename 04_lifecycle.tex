@@ -1,76 +1,24 @@
 \section{The lifecycle of AI Models}
+The core knowledge of an HCAI Agent is constituted by the set of
+models that it adopts in order to interpret the input data, take
+decision, and provide explanations for the taken decision.  If we
+ignore the phisical aspects of an agent, it is acceptable to say that
+the behavour of an HCAI agent is fully determined by its models.
+Therefore, most of the requirements and the guidelings provided for
+HCAI agents reflects how models are build, and they evolve, and how
+they are used to take decitions.
 
-\as{What I miss here, and in fact I already missed it in the previous section, is a sort of roadmap: why are we talking about life-cycle now? Why did we enumerate types of models in the previous section? In what way are all these pieces connected, and how are they useful (or even necessary) for building "foundations for human-centered AI"?  I guess we should give such a roadmap in the Introduction, or even in a section by itself after the Introduction.}
+For this reason it makes a lot of sense to clarify how models for HCAI
+agents are build and how they evolve. In other words the lifecycle of
+AI models. 
 
-In this section we describe the main phases of an AI model. These
-phases can be the result of human intervention, automatic 
-procedure, or a combination of the two.
-\todo{Put the model lifecycle in a standard notation, e.g.,
-  UML or BPMN, Emphasize the human interaction in the life cycle and the
-interaction with the AI models \ps{I attempted both, see figure~\ref{fig:peterlifecycle}}}
-
-\begin{figure}
-\begin{center}
-\begin{tikzpicture}[thick,action/.style={shape=rectangle, rounded corners,
-                     draw, anchor=center,
-                     text width=10em, align=center,
-                     top color=white, bottom color=blue!20,
-                     inner sep=1ex},
-                   model/.style={shape=circle,
-                     draw, anchor=center,
-                     text width=5em, align=center,
-                     top color=white, bottom color=red!20,
-                     inner sep=1ex},
-            input/.style={shape=rectangle,
-                     draw, anchor=center,
-                     text width=8em, align=center,
-                     top color=white, bottom color=green!20,
-                     inner sep=1ex},
-            output/.style={shape=rectangle,
-                     draw, anchor=center,
-                     text width=8em, align=center,
-                     top color=white, bottom color=yellow!20,
-                     inner sep=1ex}]
- \node[action] (spec) {Model schema specification};
- \node[model,below = of spec] (mschema) {Model schema};
- \node[action,below = of mschema] (inst) {Model instantiation};
- \node[model,below = of inst] (model) {instantiated model};
- \node[action,below = of model] (inference) {Inference with the model};
- \node[action,right = of inst] (revision) {Quality Control \& Maintenance, e.g., \textbf{Verification}};
- \node[input,left = of inst] (knowledge) {Knowledge about the
-   environment, training data, constraints, \textbf{requirements}};
- \node[input,left = of inference] (request) {Service request + input
-   data, \textbf{observations}};
- \node[input,right = of revision] (add_knowledge) {Additional
-   knowledge, evaluation of performances, and satisfaction of the \textbf{requirements}}; 
- \node[output,right = of inference] (answer) {Answer, decision,
-   preference, \textbf{explanations}, \dots};
- \node[circle,draw] at ($ (answer) !.5! (revision) $) (plus)
- {\large\bf +};
- \draw[->] (spec) -- (mschema);
- \draw[->] (mschema) -- (inst);
- \draw[->] (knowledge) -- (inst);
- \draw[->] (knowledge) -- (inst);
- \draw[->] (inst) -- (model);
- \draw[->] (model) -- (inference);
- \draw[->] (request) -- (inference);
- \draw[->] (inference) -- (answer);
- \draw[->] (model) -- (plus);
- \draw[->] (answer) -- (plus);
- \draw[->] (plus) -- (revision);
- \draw[->] (add_knowledge) -- (revision);
- \draw[->] (revision) -- (mschema);
- \draw[->] (revision) -- (model);
-\end{tikzpicture}
-\end{center}
-\caption{\label{fig:ai-model-lifecylce} The lifecycle of an artificial
-  intelligence model}
-\end{figure}
+\todo{Emphasize the human interaction in the life cycle and the
+  interaction with the AI models.}
 
 \begin{figure}
     \centering
-    \includegraphics[width=\linewidth]{HCAI-lifecycle-v1}
-    \caption{Lifecycle by Peter (v1)}
+    \input{lifecycle}
+    \caption{AI model lifecycle (v2)}
     \label{fig:peterlifecycle}
 \end{figure}
 
@@ -128,3 +76,8 @@ This part of the AI artifact lifecycle is very relevant to human-centric artific
 In the following we propose a high level summary of the different
 techniques for schema model selection, model specification, learning
 and update and inference in the model
+
+%%% Local Variables:
+%%% mode: latex
+%%% TeX-master: "main"
+%%% End:

@@ -1,0 +1,48 @@
+\begin{tikzpicture}[every node/.style={scale=.9},thick]
+\tikzset{activity/.style={draw=red,rounded corners=10,align=center,fill=yellow!20,inner sep=5pt}}
+\tikzset{data/.style={draw,align=center,fill=white,inner sep=5pt}}
+  \draw[dashed,fill=green!10] (0,-2) rectangle ++(5,12);
+  \draw[dashed,fill=red!10] (5,-2) rectangle ++(5,12);
+  \draw[dashed,fill=blue!10] (10,-2) rectangle ++(5,12);   
+  \draw (0,-2) rectangle ++(15,12);
+  \node[draw,fill=white,rectangle] at (2.5,10) {Design};
+  \node[draw,fill=white,rectangle] at (7.5,10) {Modelling};
+  \node[draw,fill=white,rectangle] at (12.5,10) {Operating};
+  \node[activity] at (5,9) (specification) {model schema \\ specification};
+  \node[data] at (7.5,8) (schema) {\\ model schema \\};
+  \node[builder,minimum size=1cm,left = of specification] (b) {AI engineer};
+  \node[activity] at (7.5,6) (instantiation) {model instantiation \\ training, optimization, \\ knowledge encoding, \\ reinforcement learning, \\ model updating,\dots };
+  \node[data] at (2.5,7) (knowledge) {supervisions \\ background knowledge \\ constraints \dots };
+  \node[data] at (12.5,7) (rewards) {Rewards, feedback, \\  knowledge, \dots \\ collected at run time}; 
+  \node[data] at (7.5,4) (model) {\\ Instantiated Model \\}; 
+  \node[activity] at (7.5,2) (inference) {Inference with \\ the model}; 
+  \node[graduate,minimum size=1cm] at (2.5,5) {knowledge expert}; 
+  \node[data] at (2.5,3) (test) {Test data and \\ test cases};
+  \node[data] at (12.5,3) (observations) {Observations, and \\ requests from \\ the end user};
+  \node[judge,minimum size=1cm] at (2.5,1) {??????};
+  \node[bob,minimum size=1cm,mirrored] at (12.5,1) {end user};
+  \node[activity] at (5,0.5) (verification) {Quality control \\ end Verification};
+  \node[activity] at (10,0.5) (satisfaction) {collection of \\ feedback, rewards, \\ satisfaction level, \dots};
+  \node[data] at (2.5,-1) (requirements) {Requirements};
+  \node[data] at (7.5,-1) (decision) {Actions, Decisions, \\ preferences \dots and \\ related explanations};
+  \draw[-latex,red] (knowledge) -- (instantiation);
+  \draw[-latex,red] (schema) -- (instantiation);
+  \draw[-latex,red] (knowledge) -- (specification);
+  \draw[-latex,red] (specification) -- (schema);
+  \draw[-latex,red] (instantiation) -- (model);
+  \draw[-latex,red] (model) -- (inference);  
+  \draw[-latex,red] (test) -- (inference);
+  \draw[-latex,red] (observations) -- (inference);  
+  \draw[-latex,red] (inference) -- (decision);
+  \draw[-latex,red] (decision) -- (verification);
+  \draw[-latex,red] (requirements) -- (verification);
+  \draw[-latex,red] (verification) -- (4,-1.5) -- (.5,-1.5) -- (.5,7) -- (knowledge);
+\draw[-latex,red] (decision) -- (satisfaction);
+  \draw[-latex,red] (satisfaction) -- (11,-1.5) -- (14.5,-1.5) -- (14.5,7) -- (rewards);
+  \draw[-latex,red] (rewards) -- (instantiation);
+\end{tikzpicture}
+
+%%% Local Variables:
+%%% mode: latex
+%%% TeX-master: "main"
+%%% End:

@@ -7,6 +7,7 @@
 \usetikzlibrary{decorations.text}
 \usetikzlibrary{arrows.meta}
 \usetikzlibrary{decorations,backgrounds, shapes, shadows}
+\usepackage{tikzpeople}
 \usepackage{pgfplots}
 \usepackage{amsmath,amsfonts}
 \usepackage[stable]{footmisc}
@@ -41,7 +42,7 @@
 \def\jv#1{{\color{violet} JAVIER: #1}}
 \def\ps#1{{\color{olive} PETER: #1}}
 \def\ls#1{{\color{brown} LUCIANO: #1}}
-
+\def\new#1{{\color{green!70!black} CHANGED #1}}
 \title{Foundational aspects of human centered Artificial Intelligence
   in AI4EU}
 \author{
@@ -67,25 +68,28 @@ Luciano Serafini\inst{8}}
 }
 
 
-
 \begin{document}
 \maketitle
 \todo{decide the venue}
 \todo{invite somebody from Explanable AI}
 
 \begin{abstract}
-This paper addresses foundational aspects of \emph{\jr{Human Centered
-Artificial Intelligent (HCAI)} agents}, which are physical or software agents, with \jr{AI} components, constructed to interact \jr{or} collaborate with humans.
-The article identifies five main concepts that characterise an \jr{HCAI} agent:
-\emph{Observation}, \emph{Requirement}, \emph{Action}, \emph{Explanation} and \emph{AI Model}. 
-Based upon these, we propose a characterisation of the \jr{qualifiers} of 
+This paper addresses foundational aspects of Human Centered
+Artificial Intelligent (HCAI) agents. By HCAI agent we refer to
+physical or software computational agents, with AI components that is in charged of
+interacting and/or collaborating with humans.
+The article identifies five main concepts that characterise an HCAI agent.
+\emph{Observation}, \emph{Requirement}, \emph{Action}, \emph{Explanation} and \emph{Model}. 
+Based on these well defined concepts, we characterize 
 \emph{Explainable AI}, \emph{Collaborative AI}, \emph{Verifiable
-  AI}, and the relationship between them. 
-We focus the analysis on scenarios consisting of a single agent operating in non-deterministic environments
-\lo{I would add something like "interacting with people" or "in presence of humans"...}.
-\todo{Add a sentence that explains the utility of the contribution of
-  this paper.}
-Such a characterisation is important for developing AI agents that fulfil their intended function correctly. This requires all artefacts to be amenable to analysis and comprehension by humans, starting from the foundations rather than retrofitted into existing approaches.
+  AI}, and we describe the possible relationship between them.
+We focus the analysis on scenarios consisting of a single agent
+operating in non-deterministic environments in presence of humans.
+Such a characterisation is important for developing AI
+agents that fulfil their intended function correctly. This requires
+all artefacts to be amenable to analysis and comprehension by humans,
+starting from the foundations rather than retrofitted into existing
+approaches. \ls{This last sentence does not convince me}.
 \end{abstract}
 
 To propose text modification pleas use the following macros: 

@@ -1,4 +1,6 @@
-  \begin{tikzpicture}\sf
+\begin{tikzpicture}\sf
+  \foreach \x in {0,...,4}
+    \node[draw,circle,fill=yellow!40] at  (\x*360/5+54:2.9) {model$_{\x}$};
   \draw[fill=yellow!40] (0,0) circle [radius=2.75];  
   \draw[fill=red!30] (0,0) circle [radius=2];
   \draw[white,line width=10pt] (-2,0) to (2,0);
@@ -6,8 +8,9 @@
   \draw (0,0) circle [radius=2];
   \foreach \x in {1,...,4}
     \coordinate (a\x) at (\x*360/4:1.5);
-  \foreach \x in {1,...,5}
-    \coordinate (b\x) at (\x*360/5-130:2.25);
+  \foreach \x in {0,...,4}
+    \node[circle,fill=yellow!40] at  (\x*360/5+54:2.9) {model$_{\x}$};
+ \node[] at  (90:2.4) {HCAI agent};
     \draw[fill=blue!70!yellow!35] (0,0) circle [radius=1.25];
     \draw[fill=green!40!black] (0,1.25) arc (90:270:1.25);
     \draw[draw=none,fill=green!40!black] (0,.6125) circle [radius=.6125];  
@@ -18,8 +21,10 @@
     \draw[draw=none,postaction={decorate,decoration={text along path,text align=center,text={Explanation}}}] (a3) to [bend left=45] (a2);
    \draw[draw=none,postaction={decorate,decoration={raise=-5,text along path,text align=center,text={Observation}}}] (a3) to [bend right=45] (a4);
    \draw[draw=none,postaction={decorate,decoration={text along path,text align=center,text={Action}}}] (a1) to [bend left=45] (a4);
- \draw[draw=none,postaction={decorate,decoration={text along path,text align=center,text={System}}}] (b2) to [bend left=40] (b1);
-   \draw[draw=none,postaction={decorate,decoration={text along path,text align=center,text={Intelligent}}}] (b3) to [bend left=40] (b2);
-   \draw[draw=none,postaction={decorate,decoration={text along path,text align=center,text={Artificial}}}] (b4) to [bend left=40] (b3);
-   \draw[draw=none,postaction={decorate,decoration={text along path,text align=center,text={Integrated}}}] (b5) to [bend left=40] (b4);
+
  \end{tikzpicture}
+
+%%% Local Variables:
+%%% mode: latex
+%%% TeX-master: "main"
+%%% End:

@@ -2,125 +2,190 @@
 
 % \paragraph{Agent-Environment pair} 
 
-\lo{I would mention humans immediately in the reference framework, otherwise the human-centered part of the concept will not be clear. What about an agent-human-environment framework? in which human is at the center?}
 
-\as{I agree.  If we propose "foundations for human-centered AI" we should first say what we mean by "human-centerd AI", and then explain why foundations are needed for it.}
+\todo{\footnotesize Luca: I would mention humans immediately in the reference framework, otherwise the human-centered part of the concept will not be clear. What about an agent-human-environment framework? in which human is at the center?
 
-\jr{In the definition we can cite the HLEG AI guidelines of Trustworthy AI, https://ec.europa.eu/futurium/en/ai-alliance-consultation/guidelines}
+Alessandro: I agree.  If we propose "foundations for human-centered AI" we should first say what we mean by "human-centerd AI", and then explain why foundations are needed for it.
 
-We consider a reference framework composed of an \jr{HCAI} agent (or simply agent) that operates in an
-environment \lo{"in presence of humans"...}. We call this framework the agent-environment framework. In an
-agent-environment framework there is a clear division between what is
-internal to the agent, and what is external to the agent, i.e., the
-environment. The agent \jr{observes} the environment via sensors, and \jr{acts upon} 
-modifies the environment via \jr{effectors}. Every interaction between the agent
-and the environment happens through these two categories. \jr{Observations and actions}
-are considered in a very broad sense \todo{observation or percept, not sensors, are the input concepts corresponding to action as output concept. Sensor is the input concept corresponding to the effector input concept}. Sensors range from low level
-sensors to input in natural language, images, movies, etc.  Actions
+Jaques: In the definition we can cite the HLEG AI guidelines of Trustworthy AI
+
+Luciano: I have tried to address your observations in this first page}
+
+In the recent years, artificial intelliget (AI) systems become popular
+and have an important and pervasive impact in the personal life and in
+the society evolution.  The fact that AI systems can significatively
+affect human lives, and can play an active role in the society,
+fostered the discussion on how these new systems should behave in
+relationship with humans.  Human Centered AI (HCAI) concerns the study
+of how present and future AI systems will interact with human lives in
+a mixed society composed of artificial and human equally intelligent
+agents.
+Due the interdisciplinarity of the topic, the discussion involves both
+technical and non technical people which have see AI agent from
+different perspectives which are in many cases difficult to integrate
+in a coherend vision in which each point of view can contribute in and
+complement other perspectives.
+Of particular interests are the recent attempts to provide
+requirements and ethical guidelines that regulates Human Centered
+Artificial Intelligent agents. Such a guidelines describes HCAI agents
+that are at a very high level, nonetheless such a guidelines has
+certainly an important impact on the future of AI. However,
+understanding the impact of such a high level qualitative requirements
+on the technical development an HCAI agents is neither trivial nor
+unique.
+
+The main objective of this document is to provide a reference
+description of the main components and functions of HCAI Agent that
+helps to bridge the gap between the high level specifications of HCAI
+agents provided by e.g., the European Commission in
+\cite{eu-ethical-guidelines} which is close enough to the real
+technical implementation of an HCAI agent.
+Such a description should contribute to the grounding of high level
+qualitative statements into technical requirements on a HCAI agent.
+The necessity of such a grounding is explicitly state in
+
+\begin{quote}
+Requirements for Trustworthy AI should be ''translated'' into
+procedures and/or constraints on procedures, which should be anchored
+in the AI system’s architecture. \cite[page 21]{eu-ethical-guidelines}.
+\end{quote}
+
+In other words, the main objective of this paper is an attempt to fill
+the gap between ``non technical description of HCAI agent'' and more
+``technical structure'' that is understandable without a deep
+knowledge of the main technics of AI, such as Machine Learning,
+Automated Reasoning, Reinforcement Learning, Probabilistic inference
+and optimisation.  Despite, this we will try to be precise enough to
+allow the mapping of hight level concepts that one can find for
+instance in HCAI ethical guidelines into a more technical and
+technically operative description.  We are aware of the limits of this
+paper, and we believe that this is just a first step towards the
+filling of such a cultural gap.
+
+\section{Definition of HCAI agent}
+Instead of given a single definition of HCAI Agent, in wat follows we
+list a set of features that AI agent should meet in order to be
+considered Human Centered.
+
+\paragraph{Agent-environment pair}
+\def\agent{\mathbf{Ag}}
+\def\agentState{State(\agent)}
+\def\environment{\mathbf{Env}}
+\def\environmentState{State(\environment)}
+
+We consider a reference framework composed of an HCAI agent (or simply
+agent) that operates in an environment in presence of humans. We call
+this framework the agent-environment framework. HCAI concentrates on
+environments in which humans directly interacts with the artificial
+agent in a collaborative attitude.  In an agent-environment framework,
+there is a clear division between what is internal to the agent, and
+what is external to the agent, i.e., the environment.
+Both the agent and the enviroment at every time poin are in a state,
+that we refer as the state of the agent and the state of the
+environment. Since we don't consider quantum physic both agents and
+environments are in one single state at every time. While the internal
+state of the agent might be directly accessible to the agent, the
+state of the environment and the humans that inabitate it is sont
+directly accessible by the agent, which can only have partial
+observations on it.
+The agent-environment pair can be represented as a pair $(\agent,\environment)$ with
+$\agent=\{\agentState_t\}_{t\geq t_o}$ and $\environment = \{\environmentState_t\}_{t\geq t_0}$ where $t_0$ is
+    some orign point. Notice that in the environment $\environment$
+    includes also the humnas that interacts with the agent.
+
+  \paragraph{Observations and actions}
+The agent observes the environment via sensors, and acts upon the
+environment via effectors. Every interaction between the agent and the
+environment happens through these two categories. Observations and
+actions are considered in a very broad sense. Observation or percept,
+Sensors provides the agent with observations or precepts that range
+from low level data, natural language, images, movies, etc.  Actions
 may range from physical actions, as moving ahead, moving an arm,
-grasping an object, to communicative actions, such as jr{displaying} some data
-on the screen, uttering a sentence, smiling, or playing a song or a
-movie. In general
-there is no synchronisation between actions and observations, and both
-actions and observations can happen independently without following a
-precise protocol.  Finally the environment may change due the the effect
-of some agent's action, or it may change due to some external cause,
-which is not controlled by the agent (e.g., \jr{a human} agent can
-operate in the environment) \todo{I took out "some other agent" since the abstract mentions that we restrict the scope of our paper to single agent systems. BTW should we and why? :)}.
+grasping an object, to communicative actions (speech acts), such as
+displaying some data on the screen, uttering a sentence, smiling, or
+playing a song or a movie. In general there is no synchronisation
+between actions and observations, and both actions and observations
+can happen independently without following a precise protocol.  HCAI
+imposes a number of restrictions and requirements on the data that can
+be observed by an agent and the actions that can be
+executed. Concerning observations, HCAI systems ``\dots must guarantee
+privacy and data protection throughout a system’s entire lifecycle'',
+and they should be unbiased. Concerning the actions that an HCAI is
+allowed to execute the major requirement is that they are
+``\dots consistent with the input, and that the decisions [to execute
+action] are made in a way allowing validation of the underlying
+process''. Furthermore HCAI should execute only legal actions
+i.e., actions complying with all applicable laws and regulations. 
 
-% \paragraph{Goal directed agents} 
-An AI agent always has one or more goals to achieve\footnote{\jr{The so-called \emph{reflex} agents \cite{aima4}, which internal architecture reduces to a single reasoning component that directly maps observations to actions do not internally maintain an explicit representation of their goals. Even in this case, the mapping function or rule base that implements their reflexes are nevertheless programmed or machine learned with some implicit goal in mind for these agents to achieve.}}. At a given
-time-point of its life, some goals can be completely
-achieved (and therefore these are not goals anymore), some of them can be
-partially achieved, and for other the agent does not have a plan to
-achieve them. In order to
-achieve its goal(s) an \jr{HCAI} agent can autonomously execute actions \todo{too much content in parentheses, hard to read} (e.g.,
-an autonomous agent with a planner obtains these actions by planning)
-or some external event may happen so that the agent will get closer to
-the goal \todo{Jacques: I do not think this is the best example of "external event" bringing the agent closer to its goal; a simpler, more human-centric example would be \emph{a human collaborating with the agent carries out an action that bring them both closer to their common goal.} (e.g., a classifier is trained with new labelled data)}.
-Goals in agents exist on several levels: (i) beneficial properties of
-a model and its reasoning on the level of model schema (including
-algorithm) design, (ii) high performance (correctness and/or
-efficiency) on the level of setting concrete parameters of a model in
-an agent, and (iii) goals that are represented within the agent and
-direct the agent's behaviour in the world.  Typical machine
-learning goals are on level (ii) and typical planning goals are on
-level (iii).  However, the agent might have the goal to improve itself
-by finding additional data for training (as done in Active Learning)
-or by attempting modifications of its own system (similar to genetic
-programming) where the levels merge or are all represented within the
-agent.
+\paragraph{Goal directed agents} 
+AI agent always have one or more goals to achieve \footnote{The
+  so-called \emph{reflex} agents \cite{aima4}, which internal
+  architecture reduces to a single reasoning component that directly
+  maps observations to actions do not internally maintain an explicit
+  representation of their goals. Even in this case, the mapping
+  function or rule base that implements their reflexes are
+  nevertheless programmed or machine learned with some implicit goal
+  in mind for these agents to achieve.}. Agent goals can be codified
+in many different ways, depending on the architecture of an agent. For
+instance the goal of the agent could be to optimize a certain function
+or to find the best path to achieve a position, or to improve it's
+capability of recognising objects in the scene, or to correctly answer
+users queries. In HCAI the achievement of such a goal should not harm
+the humans present in the environment. Making explicit such goals in a
+necessary condition to suppor the principles of prevention of harm and
+fairness mentioned in \cite{eu-ethical-guidelines}.  \footnote{From
+  \cite[page 12]{eu-ethical-guidelines} ``AI systems should neither
+  cause nor exacerbate harm or otherwise adversely affect human
+  beings, [\dots] ensuring that individuals and groups are free from
+  unfair bias, discrimination and stigmatisation. If unfair biases can
+  be avoided, AI systems could even increase societal fairness.''}
 
-% \begin{tikzpicture}[every node/.style = {scale=.6}]
-% \draw (0,0) rectangle (5,3);
-% \draw (0,1) -- (4,1) -- (4,2) -- (1,2);
-% \node[circle,draw,fill=black!10] (A) at (.5,.5) {A};
-% \node[circle,dashed,draw,red,fill=red!10] (G) at (2.5,1.5) {G};
-% \foreach \i/\p/\q in {1/1.5/0.5, 
-%                      2/2.5/0.5, 
-%                      3/3.5/0.5, 
-%                      4/4.5/0.5, 
-%                      5/4.5/1.5,
-%                      6/4.5/2.5,
-%                      7/3.5/2.5,
-%                      8/2.5/2.5,
-%                      9/1.5/2.5,
-%                      10/0.5/2.5,
-%                      11/0.5/1.5,
-%                      12/1.5/1.5}{
-% \node[circle,dashed,draw] (\i) at (\p,\q) {A};
-% };
-% \foreach \i/\j/\a in {A/1/east,
-%  1/2/east,2/3/east,3/4/east,4/5/north,5/6/north,6/7/west,7/8/west,8/9/west,9/10/west,10/11/south,11/12/east,12/G/east}
-% \draw[->,dashed] (\i) -- node[sloped,above]{\a} (\j);
-% \end{tikzpicture}
+\paragraph{No absolutely autonomous agents} HCAI agent are not
+completely autonomous, since their behaviour should always be determined by
+some external environmental or human event. Humans should always be
+allowed to intervene in order to avoid that the agent will perform
+one specific or a set of actions. This is necessary to guarantee ``The
+principle of respect for human autonomy'', that allows a human to
+autonomously decide to prevent the execution of one or more actions to
+the HCAI agent. From the architectural poin of view it means that
+among the set of observations that an HCAI agent has to employ, there
+should be a sensor that detect the willing of the humans to interrups
+some planned actions.
 
-% \begin{tikzpicture}
-% \draw (0,5) -- (0,0) -- (5,0);
-% \foreach \i/\n in {0/0.0,1/0.2,2/0.4,3/0.6,4/0.8,5/1.0}{
-%    \draw[line width=.1] (-.2,\i) -- (.2,\i);
-%    \node at (-.4,\i) {\n};};
-% \foreach \i/\n in {0/0.0,1/0.2,2/0.4,3/0.6,4/0.8,5/1.0}{
-%    \draw[line width=.1] (\i,-.2) -- (\i,.2);
-%    \node at (\i,-.4) {\n};};
-% \node[circle,draw,fill=black!10] (C) at (1,1) {C};
-% \node[circle,dashed,draw,red,fill=red!10] (G) at (5,5) {C};
-% \foreach \i/\p/\q in {1/2/3,
-%                      2/4/3.5}{
-% \node[circle,dashed,draw] (\i) at (\p,\q) {A};
-% };
-% \foreach \i/\j in {C/1,1/2,2/G}
-% \draw[->,dashed] (\i) -- node[sloped,above]{train} (\j);
-% \node[rotate=90] at (-1,2.5) {recall};
-% \node at (2.5,-1) {precision};
-% \end{tikzpicture}
-
-
-% \paragraph{Human Centered AI agent} 
-\todo{distinguish between the different human roles} 
-A way to see human-centered AI is shown in
-figure~\ref{fig:hcai-onion}.  An initial observation concerns the fact
+\section{Schema for HCAI agent}
+A pictorial representation of our vision of a HCAI agent is shown in
+figure~\ref{fig:hcai-onion}. This picture interprets literally the adjective 
+``human centered'' by drawing the human, and his/her environment, at
+the center of the scene surrounded by the agent. This is the opposite
+of the usual representation that
+show an AI agent in the center surrounded by the environment and the humans.
+A first observation concerns the fact
 that humans cannot be separated from the environment where they
 operate. Indeed they are \emph{part} of the environment; they are
 \emph{embedded} in it, In other words, humans and environment are
 complementary, interconnected, and interdependent in the natural
-world, and they interrelate to one another. Therefore Human-Centered Artificial
-Intelligence should take into account both humans and the
-environment where humans operate.
-
+world, and they interrelate to one another. Therefore HCAI Agents should
+take into account both humans and the environment where humans
+operate. In the picture this is represented by the blue and green Yin
+Yang. 
 \begin{figure}[h]
   \begin{center}
     \input{onion}
 \end{center}
-\caption{\label{fig:hcai-onion} The Human-Centered Artificial
-  Intelligence \cn{I think that we will be required to explain better the figure with a more ``extensive" caption, as well as define human (H) and environment (E). We could change it like that: ``A simple schematization of Human-Centered Artificial Intelligence represented as an set of agents acting as an integrated artificial intelligent systems (external ring) and their interactions (inner ring) with respect to humans (H) and environment (E)"}}
+\caption{\label{fig:hcai-onion} 
+A simple
+  schematization of Human-Centered Artificial Intelligence Agent 
+ (external ring) and its interactions with
+  humans (H) and environment (E) (inner ring).}
 \end{figure}
 
 The external ring in Figure~\ref{fig:hcai-onion} represents the
 artificial intelligent agent(s). It can refer to one single
 intelligent agent or a set of interrelated intelligent agents, which
 autonomously interact following, e.g., a multi-agent paradigm. Every
-single artificial intelligent system can implement one (or more) tasks
+HCAI agen accomplish some task directly relevant for the humans it
+interacts with.
+
 using one (or more) specific approaches/models. For instance an
 ``artificial reasoner'' could represent its knowledge in some logical
 formalism and support query answering and inference through automatic
@@ -164,4 +229,7 @@ represented in a mathematical structure is an open issue.
   decision. Explanations should be human understandable and acceptable
   in a rational system shared by the machine and the human. 
 
-
+%%% Local Variables:
+%%% mode: latex
+%%% TeX-master: "main"
+%%% End:
